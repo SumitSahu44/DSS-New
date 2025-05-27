@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elegance - Premium Furniture</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+
+      body {
+          font-family: 'Poppins', sans-serif;
+      }
+
+      h1, h2, h3, h4, h5 {
+          font-family: 'Playfair Display', serif;
+      }
+
+      .hero-section {
+          background-position: center;
+          background-size: cover;
+          background-repeat: no-repeat;
+      }
+
+      input:focus {
+          outline: none;
+      }
+
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+
+      .category-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      .product-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#d4a373", secondary: "#e9edc9" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 w-full bg-white shadow-sm z-50">
+      <div
+        class="container mx-auto px-4 py-4 flex items-center justify-between"
+      >
+        <div class="flex items-center">
+          <a href="#" class="text-3xl font-['Pacifico'] text-primary">logo</a>
+          <nav class="hidden md:flex ml-12">
+            <a
+              href="#"
+              class="mx-4 text-gray-800 hover:text-primary font-medium transition-colors"
+              >Home</a
+            >
+            <a
+              href="./categories.html"
+              class="mx-4 text-gray-800 hover:text-primary font-medium transition-colors"
+              >Categories</a
+            >
+            <a
+              href="#"
+              class="mx-4 text-gray-800 hover:text-primary font-medium transition-colors"
+              >Collections</a
+            >
+            <a
+              href="#"
+              class="mx-4 text-gray-800 hover:text-primary font-medium transition-colors"
+              >About</a
+            >
+            <a
+              href="#"
+              class="mx-4 text-gray-800 hover:text-primary font-medium transition-colors"
+              >Contact</a
+            >
+          </nav>
+        </div>
+
+        <div class="flex items-center">
+          <div class="relative mr-6 hidden md:block">
+            <input
+              type="text"
+              placeholder="Search..."
+              class="pl-10 pr-4 py-2 rounded-full bg-gray-100 text-sm border-none"
+            />
+            <div
+              class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-500"
+            >
+              <i class="ri-search-line"></i>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-4">
+            <a
+              href="#"
+              class="w-10 h-10 flex items-center justify-center text-gray-700 hover:text-primary transition-colors"
+            >
+              <i class="ri-heart-line ri-lg"></i>
+            </a>
+            <a
+              href="#"
+              class="w-10 h-10 flex items-center justify-center text-gray-700 hover:text-primary transition-colors"
+            >
+              <i class="ri-shopping-cart-line ri-lg"></i>
+            </a>
+            <a
+              href="#"
+              class="hidden md:flex px-5 py-2.5 bg-primary text-white font-medium !rounded-button whitespace-nowrap hover:bg-opacity-90 transition-colors"
+            >
+              Get a Quote
+            </a>
+            <button
+              class="md:hidden w-10 h-10 flex items-center justify-center text-gray-700"
+            >
+              <i class="ri-menu-line ri-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section
+      class="hero-section w-full h-[700px] mt-16 flex items-center relative"
+      style="background-image: url('https://readdy.ai/api/search-image?query=A%20luxurious%20modern%20living%20room%20with%20a%20stylish%20beige%20sofa%2C%20wooden%20coffee%20table%2C%20and%20decorative%20plants.%20The%20room%20has%20large%20windows%20with%20natural%20light%20streaming%20in%2C%20illuminating%20the%20minimalist%20decor.%20The%20left%20side%20has%20a%20clean%2C%20gradient%20transition%20to%20a%20lighter%20background%20that%20will%20blend%20with%20text.%20High-end%20interior%20design%20with%20neutral%20color%20palette.&width=1600&height=900&seq=1&orientation=landscape');"
+    >
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent"
+      ></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-xl">
+          <h1
+            class="text-5xl md:text-6xl font-bold text-gray-900 leading-tight mb-6"
+          >
+            Transform Your Space with Timeless Furniture
+          </h1>
+          <p class="text-xl text-gray-700 mb-8">
+            Discover our curated collection of premium furniture pieces designed
+            to elevate your home's aesthetic and comfort.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="#"
+              class="px-8 py-3 bg-primary text-white font-medium !rounded-button whitespace-nowrap hover:bg-opacity-90 transition-colors"
+              >Shop Now</a
+            >
+            <a
+              href="#"
+              class="px-8 py-3 bg-white text-gray-800 border border-gray-300 font-medium !rounded-button whitespace-nowrap hover:bg-gray-50 transition-colors"
+              >Explore Collection</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Browse Our Categories
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Explore our wide range of furniture categories designed to
+            complement every room in your home.
+          </p>
+        </div>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8"
+        >
+          <!-- Category 1 -->
+          <div
+            class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20cozy%20living%20room%20with%20a%20modern%20sofa%2C%20coffee%20table%2C%20and%20stylish%20decor.%20The%20room%20has%20a%20warm%20atmosphere%20with%20neutral%20colors%2C%20wooden%20accents%2C%20and%20decorative%20cushions.%20The%20furniture%20is%20elegant%20and%20contemporary%20with%20clean%20lines.&width=400&height=500&seq=2&orientation=portrait"
+                alt="Living Room"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                Living Room
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Stylish sofas, coffee tables, and accent pieces for your living
+                space.
+              </p>
+              <a href="#" class="flex items-center text-primary font-medium">
+                Browse <i class="ri-arrow-right-line ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Category 2 -->
+          <div
+            class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20serene%20bedroom%20with%20a%20luxurious%20bed%2C%20nightstands%2C%20and%20elegant%20decor.%20The%20room%20features%20soft%20textiles%2C%20a%20neutral%20color%20palette%2C%20and%20tasteful%20lighting.%20The%20furniture%20has%20clean%20lines%20and%20a%20contemporary%20design%20with%20natural%20materials.&width=400&height=500&seq=3&orientation=portrait"
+                alt="Bedroom"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">Bedroom</h3>
+              <p class="text-gray-600 mb-4">
+                Comfortable beds, nightstands, and dressers for peaceful rest.
+              </p>
+              <a href="#" class="flex items-center text-primary font-medium">
+                Browse <i class="ri-arrow-right-line ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Category 3 -->
+          <div
+            class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20sophisticated%20home%20office%20with%20a%20modern%20desk%2C%20ergonomic%20chair%2C%20and%20organized%20shelving.%20The%20workspace%20has%20a%20clean%20design%20with%20wooden%20elements%2C%20minimalist%20decor%2C%20and%20functional%20storage%20solutions.%20Natural%20light%20illuminates%20the%20professional%20yet%20comfortable%20space.&width=400&height=500&seq=4&orientation=portrait"
+                alt="Office"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">Office</h3>
+              <p class="text-gray-600 mb-4">
+                Ergonomic desks, chairs, and storage for productive workspaces.
+              </p>
+              <a href="#" class="flex items-center text-primary font-medium">
+                Browse <i class="ri-arrow-right-line ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Category 4 -->
+          <div
+            class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=An%20elegant%20dining%20area%20with%20a%20wooden%20table%2C%20matching%20chairs%2C%20and%20tasteful%20decor.%20The%20space%20has%20a%20warm%20ambiance%20with%20subtle%20lighting%2C%20table%20settings%2C%20and%20decorative%20elements.%20The%20furniture%20has%20a%20timeless%20design%20with%20attention%20to%20detail%20and%20craftsmanship.&width=400&height=500&seq=5&orientation=portrait"
+                alt="Dining"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">Dining</h3>
+              <p class="text-gray-600 mb-4">
+                Elegant tables, chairs, and buffets for memorable dining
+                experiences.
+              </p>
+              <a href="#" class="flex items-center text-primary font-medium">
+                Browse <i class="ri-arrow-right-line ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Category 5 -->
+          <div
+            class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="h-64 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20stylish%20outdoor%20patio%20with%20contemporary%20furniture%2C%20including%20lounge%20chairs%2C%20a%20dining%20set%2C%20and%20decorative%20elements.%20The%20space%20has%20a%20relaxed%20atmosphere%20with%20natural%20materials%2C%20plants%2C%20and%20ambient%20lighting.%20The%20furniture%20is%20weather-resistant%20with%20clean%20lines%20and%20comfortable%20design.&width=400&height=500&seq=6&orientation=portrait"
+                alt="Outdoor"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">Outdoor</h3>
+              <p class="text-gray-600 mb-4">
+                Weather-resistant seating, tables, and decor for outdoor living.
+              </p>
+              <a href="#" class="flex items-center text-primary font-medium">
+                Browse <i class="ri-arrow-right-line ml-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Featured Collection
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Discover our most popular and trending furniture pieces that combine
+            style, comfort, and quality craftsmanship.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Product 1 -->
+          <div
+            class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="relative h-80 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20luxurious%20beige%20fabric%20sofa%20with%20clean%20lines%20and%20wooden%20legs%2C%20positioned%20against%20a%20neutral%20background.%20The%20sofa%20has%20plush%20cushions%20and%20a%20contemporary%20design.%20The%20image%20shows%20the%20sofa%20from%20a%20front%20angle%2C%20highlighting%20its%20elegant%20proportions%20and%20craftsmanship.&width=500&height=600&seq=7&orientation=portrait"
+                alt="Modern Comfort Sofa"
+                class="w-full h-full object-cover object-top"
+              />
+              <button
+                class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md text-gray-600 hover:text-primary transition-colors"
+              >
+                <i class="ri-heart-line ri-lg"></i>
+              </button>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="text-xl font-semibold text-gray-900">
+                  Modern Comfort Sofa
+                </h3>
+                <span class="text-primary font-medium">$1,299</span>
+              </div>
+              <p class="text-gray-600 mb-4">
+                Elegant 3-seater sofa with premium fabric upholstery and solid
+                wood frame.
+              </p>
+              <button
+                class="w-full py-3 bg-primary text-white font-medium !rounded-button whitespace-nowrap hover:bg-opacity-90 transition-colors"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div
+            class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="relative h-80 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20contemporary%20wooden%20dining%20table%20with%20six%20matching%20chairs%2C%20positioned%20against%20a%20neutral%20background.%20The%20dining%20set%20features%20a%20warm%20wood%20finish%20with%20elegant%20proportions%20and%20craftsmanship.%20The%20image%20shows%20the%20set%20from%20a%20front%20angle%2C%20highlighting%20its%20modern%20design%20and%20quality%20materials.&width=500&height=600&seq=8&orientation=portrait"
+                alt="Artisan Dining Set"
+                class="w-full h-full object-cover object-top"
+              />
+              <button
+                class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md text-gray-600 hover:text-primary transition-colors"
+              >
+                <i class="ri-heart-line ri-lg"></i>
+              </button>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="text-xl font-semibold text-gray-900">
+                  Artisan Dining Set
+                </h3>
+                <span class="text-primary font-medium">$2,499</span>
+              </div>
+              <p class="text-gray-600 mb-4">
+                Handcrafted oak dining table with six matching chairs, perfect
+                for family gatherings.
+              </p>
+              <button
+                class="w-full py-3 bg-primary text-white font-medium !rounded-button whitespace-nowrap hover:bg-opacity-90 transition-colors"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div
+            class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+          >
+            <div class="relative h-80 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=A%20stylish%20king-size%20bed%20with%20a%20padded%20headboard%2C%20positioned%20against%20a%20neutral%20background.%20The%20bed%20features%20a%20contemporary%20design%20with%20quality%20upholstery%20and%20wooden%20legs.%20The%20image%20shows%20the%20bed%20from%20a%20front%20angle%2C%20highlighting%20its%20elegant%20proportions%20and%20craftsmanship.&width=500&height=600&seq=9&orientation=portrait"
+                alt="Serenity King Bed"
+                class="w-full h-full object-cover object-top"
+              />
+              <button
+                class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md text-gray-600 hover:text-primary transition-colors"
+              >
+                <i class="ri-heart-line ri-lg"></i>
+              </button>
+            </div>
+            <div class="p-6">
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="text-xl font-semibold text-gray-900">
+                  Serenity King Bed
+                </h3>
+                <span class="text-primary font-medium">$1,899</span>
+              </div>
+              <p class="text-gray-600 mb-4">
+                Luxurious king-size bed with upholstered headboard and solid
+                wood frame.
+              </p>
+              <button
+                class="w-full py-3 bg-primary text-white font-medium !rounded-button whitespace-nowrap hover:bg-opacity-90 transition-colors"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <a
+            href="#"
+            class="inline-block px-8 py-3 border border-primary text-primary font-medium !rounded-button whitespace-nowrap hover:bg-primary hover:text-white transition-colors"
+            >View All Products</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Benefit 1 -->
+          <div class="flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center text-primary mb-4"
+            >
+              <i class="ri-truck-line ri-2x"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              Free Shipping
+            </h3>
+            <p class="text-gray-600">
+              Free shipping on all orders over $999 within the continental US.
+            </p>
+          </div>
+
+          <!-- Benefit 2 -->
+          <div class="flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center text-primary mb-4"
+            >
+              <i class="ri-shield-check-line ri-2x"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              5-Year Warranty
+            </h3>
+            <p class="text-gray-600">
+              All our furniture comes with a 5-year warranty against
+              manufacturing defects.
+            </p>
+          </div>
+
+          <!-- Benefit 3 -->
+          <div class="flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center text-primary mb-4"
+            >
+              <i class="ri-recycle-line ri-2x"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              Sustainable Materials
+            </h3>
+            <p class="text-gray-600">
+              We use responsibly sourced materials and eco-friendly
+              manufacturing processes.
+            </p>
+          </div>
+
+          <!-- Benefit 4 -->
+          <div class="flex flex-col items-center text-center">
+            <div
+              class="w-16 h-16 flex items-center justify-center text-primary mb-4"
+            >
+              <i class="ri-customer-service-2-line ri-2x"></i>
+            </div>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2">
+              Expert Support
+            </h3>
+            <p class="text-gray-600">
+              Our design consultants are available 7 days a week to assist with
+              your needs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            What Our Customers Say
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Hear from our satisfied customers about their experience with our
+            furniture and service.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Testimonial 1 -->
+          <div class="bg-white rounded-lg shadow-md p-8">
+            <div class="flex text-primary mb-4">
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+            </div>
+            <p class="text-gray-700 mb-6">
+              "The Modern Comfort Sofa exceeded all my expectations. The quality
+              is exceptional, and it has transformed my living room completely.
+              The delivery was prompt, and the assembly service was
+              professional."
+            </p>
+            <div class="flex items-center">
+              <div
+                class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20smiling%20middle-aged%20woman%20with%20short%20brown%20hair%20against%20a%20neutral%20background%2C%20business%20casual%20attire%2C%20natural%20lighting%2C%20friendly%20expression&width=100&height=100&seq=10&orientation=squarish"
+                  alt="Emily Richardson"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">Emily Richardson</h4>
+                <p class="text-gray-600 text-sm">New York, NY</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 2 -->
+          <div class="bg-white rounded-lg shadow-md p-8">
+            <div class="flex text-primary mb-4">
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+            </div>
+            <p class="text-gray-700 mb-6">
+              "We purchased the Artisan Dining Set for our new home, and it's
+              absolutely stunning. The craftsmanship is remarkable, and it's
+              become the centerpiece of our dining area. Worth every penny!"
+            </p>
+            <div class="flex items-center">
+              <div
+                class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20smiling%20middle-aged%20man%20with%20glasses%20and%20short%20dark%20hair%20against%20a%20neutral%20background%2C%20business%20casual%20attire%2C%20natural%20lighting%2C%20friendly%20expression&width=100&height=100&seq=11&orientation=squarish"
+                  alt="Michael Thompson"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">Michael Thompson</h4>
+                <p class="text-gray-600 text-sm">Chicago, IL</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Testimonial 3 -->
+          <div class="bg-white rounded-lg shadow-md p-8">
+            <div class="flex text-primary mb-4">
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-fill"></i>
+              <i class="ri-star-half-fill"></i>
+            </div>
+            <p class="text-gray-700 mb-6">
+              "The customer service team was incredibly helpful in guiding me
+              through the selection process. The Serenity King Bed is not only
+              beautiful but also extremely comfortable. Highly recommend!"
+            </p>
+            <div class="flex items-center">
+              <div
+                class="w-12 h-12 rounded-full bg-gray-300 overflow-hidden mr-4"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=Professional%20headshot%20of%20a%20smiling%20young%20woman%20with%20long%20black%20hair%20against%20a%20neutral%20background%2C%20business%20casual%20attire%2C%20natural%20lighting%2C%20friendly%20expression&width=100&height=100&seq=12&orientation=squarish"
+                  alt="Sophia Martinez"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">Sophia Martinez</h4>
+                <p class="text-gray-600 text-sm">Los Angeles, CA</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-center mt-8">
+          <span class="w-3 h-3 rounded-full bg-primary mx-1"></span>
+          <span class="w-3 h-3 rounded-full bg-gray-300 mx-1"></span>
+          <span class="w-3 h-3 rounded-full bg-gray-300 mx-1"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-20 bg-primary bg-opacity-10">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Stay Updated
+          </h2>
+          <p class="text-gray-700 mb-8">
+            Subscribe to our newsletter to receive updates on new collections,
+            exclusive offers, and interior design tips.
+          </p>
+
+          <div class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto">
+            <input
+              type="email"
+              placeholder="Your email address"
+              class="flex-grow px-4 py-3 rounded-lg border-none shadow-sm"
+            />
+            <button
+              class="px-6 py-3 bg-primary text-white font-medium !rounded-button whitespace-nowrap hover:bg-opacity-90 transition-colors"
+            >
+              Subscribe
+            </button>
+          </div>
+
+          <p class="text-gray-600 text-sm mt-4">
+            By subscribing, you agree to our Privacy Policy and consent to
+            receive updates from our company.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <!-- Company Info -->
+          <div>
+            <a
+              href="#"
+              class="text-3xl font-['Pacifico'] text-primary mb-6 inline-block"
+              >logo</a
+            >
+            <p class="text-gray-600 mb-6">
+              We create premium furniture that combines timeless design,
+              exceptional craftsmanship, and sustainable materials to transform
+              your living spaces.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors"
+              >
+                <i class="ri-facebook-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors"
+              >
+                <i class="ri-instagram-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors"
+              >
+                <i class="ri-pinterest-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors"
+              >
+                <i class="ri-twitter-x-line"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-6">
+              Quick Links
+            </h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Blog & Articles</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Showrooms</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Careers</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Design Services</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Customer Service -->
+          <div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-6">
+              Customer Service
+            </h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >FAQ</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Shipping & Delivery</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Returns & Exchanges</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Warranty Information</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Assembly Instructions</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact -->
+          <div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-6">Contact Us</h4>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-3"
+                >
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span class="text-gray-600"
+                  >123 Furniture Ave, Design District, New York, NY 10001</span
+                >
+              </li>
+              <li class="flex items-center">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-primary mr-3"
+                >
+                  <i class="ri-phone-line"></i>
+                </div>
+                <span class="text-gray-600">(555) 123-4567</span>
+              </li>
+              <li class="flex items-center">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-primary mr-3"
+                >
+                  <i class="ri-mail-line"></i>
+                </div>
+                <span class="text-gray-600">info@elegancefurniture.com</span>
+              </li>
+              <li class="flex items-center">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-primary mr-3"
+                >
+                  <i class="ri-time-line"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Mon-Sat: 10AM-8PM, Sun: 12PM-6PM</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-8 border-t border-gray-200">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-600 text-sm mb-4 md:mb-0">
+              © 2025 Elegance Furniture. All rights reserved.
+            </p>
+
+            <div class="flex items-center space-x-4">
+              <span class="text-gray-600 text-sm">Payment Methods:</span>
+              <div class="flex space-x-3">
+                <i class="ri-visa-fill ri-lg"></i>
+                <i class="ri-mastercard-fill ri-lg"></i>
+                <i class="ri-paypal-fill ri-lg"></i>
+                <i class="ri-apple-fill ri-lg"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script id="navigation-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuButton = document.querySelector("button.md\\:hidden");
+        const mobileMenu = document.createElement("div");
+        mobileMenu.className =
+          "fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out";
+        mobileMenu.innerHTML = `
+                      <div class="flex justify-between items-center p-4 border-b">
+                          <a href="#" class="text-3xl font-['Pacifico'] text-primary">logo</a>
+                          <button class="w-10 h-10 flex items-center justify-center text-gray-700">
+                              <i class="ri-close-line ri-lg"></i>
+                          </button>
+                      </div>
+                      <nav class="p-4">
+                          <a href="#" class="block py-3 text-gray-800 hover:text-primary font-medium transition-colors">Home</a>
+                          <a href="#" class="block py-3 text-gray-800 hover:text-primary font-medium transition-colors">Categories</a>
+                          <a href="#" class="block py-3 text-gray-800 hover:text-primary font-medium transition-colors">Collections</a>
+                          <a href="#" class="block py-3 text-gray-800 hover:text-primary font-medium transition-colors">About</a>
+                          <a href="#" class="block py-3 text-gray-800 hover:text-primary font-medium transition-colors">Contact</a>
+                          <div class="mt-4">
+                              <a href="#" class="block w-full py-3 bg-primary text-white font-medium !rounded-button whitespace-nowrap text-center hover:bg-opacity-90 transition-colors">
+                                  Get a Quote
+                              </a>
+                          </div>
+                      </nav>
+                  `;
+        document.body.appendChild(mobileMenu);
+
+        mobileMenuButton.addEventListener("click", function () {
+          mobileMenu.classList.remove("translate-x-full");
+        });
+
+        const closeButton = mobileMenu.querySelector("button");
+        closeButton.addEventListener("click", function () {
+          mobileMenu.classList.add("translate-x-full");
+        });
+      });
+    </script>
+
+    <script id="wishlist-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const wishlistButtons = document.querySelectorAll(
+          ".product-card .absolute button",
+        );
+
+        wishlistButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const icon = this.querySelector("i");
+
+            if (icon.classList.contains("ri-heart-line")) {
+              icon.classList.remove("ri-heart-line");
+              icon.classList.add("ri-heart-fill");
+              this.classList.add("text-primary");
+            } else {
+              icon.classList.remove("ri-heart-fill");
+              icon.classList.add("ri-heart-line");
+              this.classList.remove("text-primary");
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
+
