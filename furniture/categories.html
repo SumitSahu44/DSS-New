@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elegance - Furniture Categories</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+          font-family: 'Poppins', sans-serif;
+      }
+      h1, h2, h3, h4, h5 {
+          font-family: 'Playfair Display', serif;
+      }
+      input:focus {
+          outline: none;
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+      }
+      .category-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+      .custom-checkbox {
+          appearance: none;
+          width: 18px;
+          height: 18px;
+          border: 2px solid #d4a373;
+          border-radius: 4px;
+          position: relative;
+      }
+      .custom-checkbox:checked {
+          background-color: #d4a373;
+      }
+      .custom-checkbox:checked::after {
+          content: "";
+          position: absolute;
+          top: 2px;
+          left: 5px;
+          width: 6px;
+          height: 10px;
+          border: solid white;
+          border-width: 0 2px 2px 0;
+          transform: rotate(45deg);
+      }
+      .custom-radio {
+          appearance: none;
+          width: 18px;
+          height: 18px;
+          border: 2px solid #d4a373;
+          border-radius: 50%;
+          position: relative;
+      }
+      .custom-radio:checked {
+          border-color: #d4a373;
+      }
+      .custom-radio:checked::after {
+          content: "";
+          position: absolute;
+          top: 3px;
+          left: 3px;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: #d4a373;
+      }
+      .color-filter {
+          position: relative;
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: all 0.2s;
+      }
+      .color-filter.selected::after {
+          content: "";
+          position: absolute;
+          top: -4px;
+          left: -4px;
+          right: -4px;
+          bottom: -4px;
+          border: 2px solid #d4a373;
+          border-radius: 50%;
+      }
+      .category-image {
+          transition: transform 0.5s ease;
+      }
+      .category-card:hover .category-image {
+          transform: scale(1.05);
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#d4a373", secondary: "#e9edc9" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Navigation -->
+    <header class="fixed top-0 left-0 w-full bg-white shadow-sm z-50">
+      <div
+        class="container mx-auto px-4 py-4 flex items-center justify-between"
+      >
+        <div class="flex items-center">
+          <a href="#" class="text-3xl font-['Pacifico'] text-primary">logo</a>
+          <nav class="hidden md:flex ml-12">
+            <a
+              href="#"
+              class="mx-4 text-gray-800 hover:text-primary font-medium transition-colors"
+              >Home</a
+            >
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="mx-4 text-primary font-medium transition-colors"
+              >Categories</a
+            >
+            <a
+              href="#"
+              class="mx-4 text-gray-800 hover:text-primary font-medium transition-colors"
+              >Collections</a
+            >
+            <a
+              href="#"
+              class="mx-4 text-gray-800 hover:text-primary font-medium transition-colors"
+              >About</a
+            >
+            <a
+              href="#"
+              class="mx-4 text-gray-800 hover:text-primary font-medium transition-colors"
+              >Contact</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center">
+          <div class="relative mr-6 hidden md:block">
+            <input
+              type="text"
+              placeholder="Search..."
+              class="pl-10 pr-4 py-2 rounded-full bg-gray-100 text-sm border-none"
+            />
+            <div
+              class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-500"
+            >
+              <i class="ri-search-line"></i>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <a
+              href="#"
+              class="w-10 h-10 flex items-center justify-center text-gray-700 hover:text-primary transition-colors"
+            >
+              <i class="ri-heart-line ri-lg"></i>
+            </a>
+            <a
+              href="#"
+              class="w-10 h-10 flex items-center justify-center text-gray-700 hover:text-primary transition-colors"
+            >
+              <i class="ri-shopping-cart-line ri-lg"></i>
+            </a>
+            <a
+              href="#"
+              class="hidden md:flex px-5 py-2.5 bg-primary text-white font-medium !rounded-button whitespace-nowrap hover:bg-opacity-90 transition-colors"
+            >
+              Get a Quote
+            </a>
+            <button
+              class="md:hidden w-10 h-10 flex items-center justify-center text-gray-700"
+            >
+              <i class="ri-menu-line ri-lg"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-20 pb-16">
+      <!-- Page Header -->
+      <section class="bg-white border-b">
+        <div class="container mx-auto px-4 py-10">
+          <nav class="flex mb-4" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1">
+              <li>
+                <a href="#" class="text-gray-600 hover:text-primary">Home</a>
+              </li>
+              <li>
+                <div class="flex items-center space-x-1">
+                  <span class="text-gray-400 mx-1">/</span
+                  ><span class="text-gray-900">Categories</span>
+                </div>
+              </li>
+            </ol>
+          </nav>
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Browse All Categories
+          </h1>
+          <p class="text-gray-600 max-w-3xl">
+            Explore our extensive collection of premium furniture categories
+            designed to elevate every room in your home. From living room
+            essentials to outdoor retreats, find the perfect pieces for your
+            space.
+          </p>
+        </div>
+      </section>
+
+      <!-- Search and Filter Bar -->
+      <section class="py-8 border-b bg-white">
+        <div class="container mx-auto px-4">
+          <div
+            class="flex flex-col md:flex-row items-center justify-between gap-4"
+          >
+            <div class="relative w-full md:w-96">
+              <input
+                type="text"
+                placeholder="Search categories..."
+                class="w-full pl-12 pr-4 py-3 rounded-lg bg-gray-100 text-gray-700 border-none"
+              />
+              <div
+                class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-500"
+              >
+                <i class="ri-search-line ri-lg"></i>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 w-full md:w-auto">
+              <div class="relative w-full md:w-48">
+                <select
+                  class="appearance-none w-full pl-4 pr-10 py-3 bg-gray-100 rounded-lg text-gray-700 border-none"
+                >
+                  <option>All Rooms</option>
+                  <option>Living Room</option>
+                  <option>Bedroom</option>
+                  <option>Dining Room</option>
+                  <option>Office</option>
+                  <option>Outdoor</option>
+                </select>
+                <div
+                  class="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none"
+                >
+                  <i class="ri-arrow-down-s-line text-gray-500"></i>
+                </div>
+              </div>
+              <div class="relative w-full md:w-48">
+                <select
+                  class="appearance-none w-full pl-4 pr-10 py-3 bg-gray-100 rounded-lg text-gray-700 border-none"
+                >
+                  <option>Sort: Featured</option>
+                  <option>Newest First</option>
+                  <option>Alphabetical: A-Z</option>
+                  <option>Alphabetical: Z-A</option>
+                </select>
+                <div
+                  class="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none"
+                >
+                  <i class="ri-arrow-down-s-line text-gray-500"></i>
+                </div>
+              </div>
+              <button
+                class="hidden md:flex items-center justify-center p-3 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-colors"
+              >
+                <i class="ri-equalizer-line ri-lg"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Categories -->
+      <section class="py-12">
+        <div class="container mx-auto px-4">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+            Featured Categories
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Featured Category 1 -->
+            <div
+              class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 h-96"
+            >
+              <div class="h-2/3 overflow-hidden relative">
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520luxurious%2520living%2520room%2520with%2520elegant%2520furniture%2520including%2520a%2520plush%2520sofa%252C%2520accent%2520chairs%252C%2520coffee%2520table%252C%2520and%2520tasteful%2520decor.%2520The%2520room%2520has%2520a%2520sophisticated%2520atmosphere%2520with%2520neutral%2520colors%252C%2520ambient%2520lighting%252C%2520and%2520large%2520windows.%2520The%2520furniture%2520pieces%2520have%2520clean%2520lines%2520and%2520premium%2520materials%2520showcasing%2520contemporary%2520design.&width=600&height=400&seq=101&orientation=landscape"
+                  alt="Living Room Collection"
+                  class="w-full h-full object-cover object-top category-image"
+                />
+                <div
+                  class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/70 to-transparent"
+                >
+                  <span
+                    class="text-white text-sm font-medium px-3 py-1 bg-primary rounded-full"
+                    >Featured</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Living Room Collection
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Discover sofas, coffee tables, and accent pieces designed for
+                  comfort and style.
+                </p>
+                <a
+                  href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+                  data-readdy="true"
+                  class="flex items-center text-primary font-medium"
+                >
+                  Browse Collection <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Featured Category 2 -->
+            <div
+              class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 h-96"
+            >
+              <div class="h-2/3 overflow-hidden relative">
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520serene%2520bedroom%2520with%2520luxurious%2520furniture%2520including%2520a%2520king-size%2520bed%2520with%2520plush%2520bedding%252C%2520elegant%2520nightstands%252C%2520dresser%252C%2520and%2520tasteful%2520decor.%2520The%2520room%2520has%2520a%2520peaceful%2520atmosphere%2520with%2520soft%2520colors%252C%2520ambient%2520lighting%252C%2520and%2520large%2520windows.%2520The%2520furniture%2520pieces%2520have%2520refined%2520details%2520and%2520premium%2520materials%2520showcasing%2520contemporary%2520design.&width=600&height=400&seq=102&orientation=landscape"
+                  alt="Bedroom Essentials"
+                  class="w-full h-full object-cover object-top category-image"
+                />
+                <div
+                  class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/70 to-transparent"
+                >
+                  <span
+                    class="text-white text-sm font-medium px-3 py-1 bg-primary rounded-full"
+                    >Featured</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Bedroom Essentials
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Create a peaceful retreat with our premium beds, nightstands,
+                  and dressers.
+                </p>
+                <a
+                  href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+                  data-readdy="true"
+                  class="flex items-center text-primary font-medium"
+                >
+                  Browse Collection <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Featured Category 3 -->
+            <div
+              class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 h-96"
+            >
+              <div class="h-2/3 overflow-hidden relative">
+                <img
+                  src="https://readdy.ai/api/search-image?query=An%2520elegant%2520dining%2520room%2520with%2520premium%2520furniture%2520including%2520a%2520large%2520wooden%2520dining%2520table%252C%2520matching%2520chairs%252C%2520sideboard%252C%2520and%2520tasteful%2520decor.%2520The%2520room%2520has%2520a%2520sophisticated%2520atmosphere%2520with%2520warm%2520colors%252C%2520ambient%2520lighting%252C%2520and%2520large%2520windows.%2520The%2520furniture%2520pieces%2520have%2520refined%2520details%2520and%2520premium%2520materials%2520showcasing%2520contemporary%2520design.&width=600&height=400&seq=103&orientation=landscape"
+                  alt="Dining Room Sets"
+                  class="w-full h-full object-cover object-top category-image"
+                />
+                <div
+                  class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black/70 to-transparent"
+                >
+                  <span
+                    class="text-white text-sm font-medium px-3 py-1 bg-primary rounded-full"
+                    >Featured</span
+                  >
+                </div>
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Dining Room Sets
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Elevate your dining experience with our handcrafted tables and
+                  chairs.
+                </p>
+                <a
+                  href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+                  data-readdy="true"
+                  class="flex items-center text-primary font-medium"
+                >
+                  Browse Collection <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- All Categories Grid -->
+      <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+            All Categories
+          </h2>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+          >
+            <!-- Category 1 -->
+            <div
+              class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+            >
+              <div class="h-64 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520modern%2520sofa%2520with%2520clean%2520lines%2520and%2520neutral%2520fabric%2520upholstery%252C%2520positioned%2520in%2520a%2520contemporary%2520living%2520room%2520setting.%2520The%2520sofa%2520has%2520plush%2520cushions%2520and%2520wooden%2520legs.%2520The%2520image%2520shows%2520the%2520sofa%2520from%2520a%2520front%2520angle%2520with%2520soft%2520lighting%2520highlighting%2520its%2520elegant%2520design%2520and%2520premium%2520materials.&width=400&height=500&seq=104&orientation=portrait"
+                  alt="Sofas & Couches"
+                  class="w-full h-full object-cover object-top category-image"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Sofas & Couches
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Premium seating options from sectionals to loveseats for your
+                  living space.
+                </p>
+                <a
+                  href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+                  data-readdy="true"
+                  class="flex items-center text-primary font-medium"
+                >
+                  Browse <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Category 2 -->
+            <div
+              class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+            >
+              <div class="h-64 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520luxurious%2520king-size%2520bed%2520with%2520an%2520upholstered%2520headboard%2520and%2520premium%2520bedding%252C%2520positioned%2520in%2520an%2520elegant%2520bedroom%2520setting.%2520The%2520bed%2520has%2520a%2520sophisticated%2520design%2520with%2520wooden%2520frame%2520and%2520legs.%2520The%2520image%2520shows%2520the%2520bed%2520from%2520a%2520front%2520angle%2520with%2520soft%2520lighting%2520highlighting%2520its%2520elegant%2520design%2520and%2520premium%2520materials.&width=400&height=500&seq=105&orientation=portrait"
+                  alt="Beds & Mattresses"
+                  class="w-full h-full object-cover object-top category-image"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Beds & Mattresses
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Luxurious beds and supportive mattresses for restful sleep and
+                  comfort.
+                </p>
+                <a
+                  href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+                  data-readdy="true"
+                  class="flex items-center text-primary font-medium"
+                >
+                  Browse <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Category 3 -->
+            <div
+              class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+            >
+              <div class="h-64 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520modern%2520coffee%2520table%2520with%2520a%2520glass%2520top%2520and%2520wooden%2520base%252C%2520positioned%2520in%2520a%2520contemporary%2520living%2520room%2520setting.%2520The%2520table%2520has%2520clean%2520lines%2520and%2520elegant%2520proportions.%2520The%2520image%2520shows%2520the%2520table%2520from%2520a%2520top%2520angle%2520with%2520soft%2520lighting%2520highlighting%2520its%2520sleek%2520design%2520and%2520premium%2520materials.&width=400&height=500&seq=106&orientation=portrait"
+                  alt="Coffee & Side Tables"
+                  class="w-full h-full object-cover object-top category-image"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Coffee & Side Tables
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Functional and stylish tables crafted from premium materials.
+                </p>
+                <a
+                  href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+                  data-readdy="true"
+                  class="flex items-center text-primary font-medium"
+                >
+                  Browse <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Category 4 -->
+            <div
+              class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+            >
+              <div class="h-64 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520modern%2520dining%2520table%2520with%2520matching%2520chairs%2520positioned%2520in%2520an%2520elegant%2520dining%2520room%2520setting.%2520The%2520set%2520features%2520a%2520wooden%2520table%2520with%2520clean%2520lines%2520and%2520upholstered%2520chairs.%2520The%2520image%2520shows%2520the%2520dining%2520set%2520from%2520a%2520front%2520angle%2520with%2520soft%2520lighting%2520highlighting%2520its%2520elegant%2520design%2520and%2520premium%2520materials.&width=400&height=500&seq=107&orientation=portrait"
+                  alt="Dining Tables & Chairs"
+                  class="w-full h-full object-cover object-top category-image"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Dining Tables & Chairs
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Elegant dining sets for intimate dinners and family
+                  gatherings.
+                </p>
+                <a
+                  href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+                  data-readdy="true"
+                  class="flex items-center text-primary font-medium"
+                >
+                  Browse <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Category 5 -->
+            <div
+              class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+            >
+              <div class="h-64 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520stylish%2520accent%2520chair%2520with%2520velvet%2520upholstery%2520and%2520metal%2520legs%252C%2520positioned%2520in%2520a%2520contemporary%2520living%2520room%2520setting.%2520The%2520chair%2520has%2520elegant%2520curves%2520and%2520a%2520vibrant%2520color.%2520The%2520image%2520shows%2520the%2520chair%2520from%2520a%2520front%2520angle%2520with%2520soft%2520lighting%2520highlighting%2520its%2520elegant%2520design%2520and%2520premium%2520materials.&width=400&height=500&seq=108&orientation=portrait"
+                  alt="Accent Chairs"
+                  class="w-full h-full object-cover object-top category-image"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Accent Chairs
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Statement seating that adds personality and comfort to any
+                  room.
+                </p>
+                <a
+                  href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+                  data-readdy="true"
+                  class="flex items-center text-primary font-medium"
+                >
+                  Browse <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Category 6 -->
+            <div
+              class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+            >
+              <div class="h-64 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520modern%2520bookshelf%2520with%2520wooden%2520shelves%2520and%2520metal%2520frame%252C%2520positioned%2520in%2520a%2520contemporary%2520home%2520office%2520setting.%2520The%2520bookshelf%2520is%2520styled%2520with%2520books%252C%2520decorative%2520objects%252C%2520and%2520plants.%2520The%2520image%2520shows%2520the%2520bookshelf%2520from%2520a%2520front%2520angle%2520with%2520soft%2520lighting%2520highlighting%2520its%2520elegant%2520design%2520and%2520premium%2520materials.&width=400&height=500&seq=109&orientation=portrait"
+                  alt="Bookcases & Shelving"
+                  class="w-full h-full object-cover object-top category-image"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Bookcases & Shelving
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Stylish storage solutions for books, decor, and personal
+                  items.
+                </p>
+                <a
+                  href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+                  data-readdy="true"
+                  class="flex items-center text-primary font-medium"
+                >
+                  Browse <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Category 7 -->
+            <div
+              class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+            >
+              <div class="h-64 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520modern%2520desk%2520with%2520an%2520ergonomic%2520chair%2520positioned%2520in%2520a%2520contemporary%2520home%2520office%2520setting.%2520The%2520desk%2520has%2520clean%2520lines%2520with%2520wooden%2520top%2520and%2520metal%2520legs%252C%2520and%2520the%2520chair%2520features%2520premium%2520upholstery.%2520The%2520image%2520shows%2520the%2520office%2520set%2520from%2520a%2520front%2520angle%2520with%2520soft%2520lighting%2520highlighting%2520its%2520elegant%2520design%2520and%2520premium%2520materials.&width=400&height=500&seq=110&orientation=portrait"
+                  alt="Home Office"
+                  class="w-full h-full object-cover object-top category-image"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Home Office
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Ergonomic desks, chairs, and storage for productive
+                  workspaces.
+                </p>
+                <a
+                  href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+                  data-readdy="true"
+                  class="flex items-center text-primary font-medium"
+                >
+                  Browse <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Category 8 -->
+            <div
+              class="category-card bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300"
+            >
+              <div class="h-64 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520stylish%2520outdoor%2520furniture%2520set%2520including%2520a%2520sofa%252C%2520chairs%252C%2520and%2520coffee%2520table%2520positioned%2520on%2520a%2520beautiful%2520patio.%2520The%2520furniture%2520features%2520weather-resistant%2520materials%2520with%2520clean%2520lines%2520and%2520comfortable%2520cushions.%2520The%2520image%2520shows%2520the%2520outdoor%2520set%2520from%2520a%2520front%2520angle%2520with%2520natural%2520lighting%2520highlighting%2520its%2520elegant%2520design%2520and%2520premium%2520materials.&width=400&height=500&seq=111&orientation=portrait"
+                  alt="Outdoor Furniture"
+                  class="w-full h-full object-cover object-top category-image"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Outdoor Furniture
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Weather-resistant pieces for patios, decks, and garden spaces.
+                </p>
+                <a
+                  href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+                  data-readdy="true"
+                  class="flex items-center text-primary font-medium"
+                >
+                  Browse <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Subcategories Section -->
+      <section class="py-12">
+        <div class="container mx-auto px-4">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+            Shop by Room
+          </h2>
+
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            <!-- Room 1 -->
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="group"
+            >
+              <div
+                class="aspect-square rounded-lg overflow-hidden mb-3 bg-gray-100 relative"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520cozy%2520and%2520stylish%2520living%2520room%2520with%2520modern%2520furniture%252C%2520including%2520a%2520sofa%252C%2520coffee%2520table%252C%2520and%2520accent%2520pieces.%2520The%2520room%2520has%2520a%2520warm%2520atmosphere%2520with%2520neutral%2520colors%2520and%2520tasteful%2520decor.%2520Soft%2520lighting%2520highlights%2520the%2520elegant%2520design%2520and%2520premium%2520materials%2520of%2520the%2520furniture.&width=300&height=300&seq=112&orientation=squarish"
+                  alt="Living Room"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div
+                  class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"
+                ></div>
+              </div>
+              <h3 class="text-center font-medium text-gray-900">Living Room</h3>
+            </a>
+
+            <!-- Room 2 -->
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="group"
+            >
+              <div
+                class="aspect-square rounded-lg overflow-hidden mb-3 bg-gray-100 relative"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520serene%2520bedroom%2520with%2520elegant%2520furniture%252C%2520including%2520a%2520bed%2520with%2520plush%2520bedding%252C%2520nightstands%252C%2520and%2520accent%2520pieces.%2520The%2520room%2520has%2520a%2520peaceful%2520atmosphere%2520with%2520soft%2520colors%2520and%2520tasteful%2520decor.%2520Gentle%2520lighting%2520highlights%2520the%2520elegant%2520design%2520and%2520premium%2520materials%2520of%2520the%2520furniture.&width=300&height=300&seq=113&orientation=squarish"
+                  alt="Bedroom"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div
+                  class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"
+                ></div>
+              </div>
+              <h3 class="text-center font-medium text-gray-900">Bedroom</h3>
+            </a>
+
+            <!-- Room 3 -->
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="group"
+            >
+              <div
+                class="aspect-square rounded-lg overflow-hidden mb-3 bg-gray-100 relative"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=An%2520elegant%2520dining%2520room%2520with%2520a%2520wooden%2520table%252C%2520matching%2520chairs%252C%2520and%2520decorative%2520elements.%2520The%2520room%2520has%2520a%2520sophisticated%2520atmosphere%2520with%2520warm%2520colors%2520and%2520tasteful%2520decor.%2520Ambient%2520lighting%2520highlights%2520the%2520elegant%2520design%2520and%2520premium%2520materials%2520of%2520the%2520furniture.&width=300&height=300&seq=114&orientation=squarish"
+                  alt="Dining Room"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div
+                  class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"
+                ></div>
+              </div>
+              <h3 class="text-center font-medium text-gray-900">Dining Room</h3>
+            </a>
+
+            <!-- Room 4 -->
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="group"
+            >
+              <div
+                class="aspect-square rounded-lg overflow-hidden mb-3 bg-gray-100 relative"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520modern%2520home%2520office%2520with%2520a%2520desk%252C%2520ergonomic%2520chair%252C%2520and%2520organizational%2520furniture.%2520The%2520space%2520has%2520a%2520productive%2520atmosphere%2520with%2520clean%2520lines%2520and%2520functional%2520decor.%2520Natural%2520lighting%2520highlights%2520the%2520elegant%2520design%2520and%2520premium%2520materials%2520of%2520the%2520furniture.&width=300&height=300&seq=115&orientation=squarish"
+                  alt="Home Office"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div
+                  class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"
+                ></div>
+              </div>
+              <h3 class="text-center font-medium text-gray-900">Home Office</h3>
+            </a>
+
+            <!-- Room 5 -->
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="group"
+            >
+              <div
+                class="aspect-square rounded-lg overflow-hidden mb-3 bg-gray-100 relative"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520stylish%2520outdoor%2520patio%2520with%2520comfortable%2520furniture%252C%2520including%2520lounge%2520chairs%252C%2520a%2520dining%2520set%252C%2520and%2520decorative%2520elements.%2520The%2520space%2520has%2520a%2520relaxing%2520atmosphere%2520with%2520natural%2520materials%2520and%2520plants.%2520Sunlight%2520highlights%2520the%2520elegant%2520design%2520and%2520weather-resistant%2520materials%2520of%2520the%2520furniture.&width=300&height=300&seq=116&orientation=squarish"
+                  alt="Outdoor"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div
+                  class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"
+                ></div>
+              </div>
+              <h3 class="text-center font-medium text-gray-900">Outdoor</h3>
+            </a>
+
+            <!-- Room 6 -->
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="group"
+            >
+              <div
+                class="aspect-square rounded-lg overflow-hidden mb-3 bg-gray-100 relative"
+              >
+                <img
+                  src="https://readdy.ai/api/search-image?query=A%2520modern%2520entryway%2520with%2520stylish%2520furniture%252C%2520including%2520a%2520console%2520table%252C%2520mirror%252C%2520and%2520decorative%2520elements.%2520The%2520space%2520has%2520a%2520welcoming%2520atmosphere%2520with%2520clean%2520lines%2520and%2520thoughtful%2520decor.%2520Soft%2520lighting%2520highlights%2520the%2520elegant%2520design%2520and%2520premium%2520materials%2520of%2520the%2520furniture.&width=300&height=300&seq=117&orientation=squarish"
+                  alt="Entryway"
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <div
+                  class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"
+                ></div>
+              </div>
+              <h3 class="text-center font-medium text-gray-900">Entryway</h3>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shop by Style -->
+      <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+            Shop by Style
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Style 1 -->
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="group relative h-80 rounded-lg overflow-hidden"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=A%2520modern%2520minimalist%2520living%2520room%2520with%2520clean%2520lines%252C%2520neutral%2520colors%252C%2520and%2520simple%2520furniture.%2520The%2520space%2520features%2520a%2520sleek%2520sofa%252C%2520coffee%2520table%252C%2520and%2520minimal%2520decor%2520with%2520an%2520emphasis%2520on%2520functionality%2520and%2520open%2520space.%2520Natural%2520light%2520highlights%2520the%2520contemporary%2520design%2520and%2520premium%2520materials.&width=500&height=600&seq=118&orientation=portrait"
+                alt="Modern Minimalist"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+              >
+                <div class="absolute bottom-0 left-0 p-6">
+                  <h3 class="text-xl font-semibold text-white mb-2">
+                    Modern Minimalist
+                  </h3>
+                  <p class="text-white/80 mb-4">
+                    Clean lines and functional design
+                  </p>
+                  <span class="inline-flex items-center text-white font-medium">
+                    Explore <i class="ri-arrow-right-line ml-2"></i>
+                  </span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Style 2 -->
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="group relative h-80 rounded-lg overflow-hidden"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=A%2520mid-century%2520modern%2520living%2520room%2520with%2520iconic%2520furniture%2520pieces%252C%2520warm%2520wood%2520tones%252C%2520and%2520retro-inspired%2520decor.%2520The%2520space%2520features%2520tapered%2520legs%252C%2520organic%2520shapes%252C%2520and%2520a%2520mix%2520of%2520materials%2520typical%2520of%25201950s-1960s%2520design.%2520Warm%2520lighting%2520highlights%2520the%2520vintage-inspired%2520design%2520and%2520premium%2520materials.&width=500&height=600&seq=119&orientation=portrait"
+                alt="Mid-Century Modern"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+              >
+                <div class="absolute bottom-0 left-0 p-6">
+                  <h3 class="text-xl font-semibold text-white mb-2">
+                    Mid-Century Modern
+                  </h3>
+                  <p class="text-white/80 mb-4">
+                    Retro-inspired with timeless appeal
+                  </p>
+                  <span class="inline-flex items-center text-white font-medium">
+                    Explore <i class="ri-arrow-right-line ml-2"></i>
+                  </span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Style 3 -->
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="group relative h-80 rounded-lg overflow-hidden"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=A%2520Scandinavian-style%2520living%2520room%2520with%2520light%2520wood%2520furniture%252C%2520white%2520walls%252C%2520and%2520cozy%2520textiles.%2520The%2520space%2520features%2520simple%2520furniture%2520with%2520functional%2520design%252C%2520natural%2520materials%252C%2520and%2520a%2520bright%252C%2520airy%2520atmosphere.%2520Natural%2520light%2520highlights%2520the%2520Nordic-inspired%2520design%2520and%2520premium%2520yet%2520understated%2520materials.&width=500&height=600&seq=120&orientation=portrait"
+                alt="Scandinavian"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+              >
+                <div class="absolute bottom-0 left-0 p-6">
+                  <h3 class="text-xl font-semibold text-white mb-2">
+                    Scandinavian
+                  </h3>
+                  <p class="text-white/80 mb-4">Light, airy, and functional</p>
+                  <span class="inline-flex items-center text-white font-medium">
+                    Explore <i class="ri-arrow-right-line ml-2"></i>
+                  </span>
+                </div>
+              </div>
+            </a>
+
+            <!-- Style 4 -->
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="group relative h-80 rounded-lg overflow-hidden"
+            >
+              <img
+                src="https://readdy.ai/api/search-image?query=A%2520luxurious%2520traditional%2520living%2520room%2520with%2520ornate%2520furniture%252C%2520rich%2520fabrics%252C%2520and%2520classic%2520decor.%2520The%2520space%2520features%2520detailed%2520woodwork%252C%2520symmetrical%2520arrangements%252C%2520and%2520elegant%2520accessories%2520like%2520crystal%2520lamps%2520and%2520framed%2520artwork.%2520Warm%2520lighting%2520highlights%2520the%2520classic%2520design%2520and%2520premium%2520materials%2520with%2520a%2520timeless%2520quality.&width=500&height=600&seq=121&orientation=portrait"
+                alt="Traditional Elegance"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+              >
+                <div class="absolute bottom-0 left-0 p-6">
+                  <h3 class="text-xl font-semibold text-white mb-2">
+                    Traditional Elegance
+                  </h3>
+                  <p class="text-white/80 mb-4">
+                    Timeless sophistication and comfort
+                  </p>
+                  <span class="inline-flex items-center text-white font-medium">
+                    Explore <i class="ri-arrow-right-line ml-2"></i>
+                  </span>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Material Guide -->
+      <section class="py-12">
+        <div class="container mx-auto px-4">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+            Shop by Material
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Material 1 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <div class="h-48 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=Close-up%2520of%2520premium%2520solid%2520wood%2520furniture%2520showing%2520natural%2520grain%2520patterns%2520and%2520warm%2520tones.%2520The%2520image%2520highlights%2520the%2520craftsmanship%2520and%2520quality%2520of%2520wooden%2520furniture%2520with%2520detailed%2520texture%2520and%2520finish.%2520Professional%2520product%2520photography%2520with%2520soft%2520lighting%2520emphasizing%2520the%2520natural%2520beauty%2520of%2520the%2520wood.&width=600&height=300&seq=122&orientation=landscape"
+                  alt="Solid Wood"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Solid Wood
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Durable and timeless furniture crafted from oak, walnut,
+                  maple, and more.
+                </p>
+                <a
+                  href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+                  data-readdy="true"
+                  class="flex items-center text-primary font-medium"
+                >
+                  View Collection <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Material 2 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <div class="h-48 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=Close-up%2520of%2520premium%2520upholstered%2520furniture%2520showing%2520luxurious%2520fabric%2520textures%2520and%2520detailed%2520stitching.%2520The%2520image%2520highlights%2520the%2520softness%2520and%2520quality%2520of%2520textile%2520upholstery%2520with%2520various%2520patterns%2520and%2520colors.%2520Professional%2520product%2520photography%2520with%2520soft%2520lighting%2520emphasizing%2520the%2520comfort%2520and%2520elegance%2520of%2520the%2520fabric.&width=600&height=300&seq=123&orientation=landscape"
+                  alt="Premium Upholstery"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Premium Upholstery
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Luxurious fabrics including velvet, linen, and performance
+                  textiles.
+                </p>
+                <a
+                  href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+                  data-readdy="true"
+                  class="flex items-center text-primary font-medium"
+                >
+                  View Collection <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Material 3 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+              <div class="h-48 overflow-hidden">
+                <img
+                  src="https://readdy.ai/api/search-image?query=Close-up%2520of%2520modern%2520furniture%2520with%2520metal%2520and%2520glass%2520elements%2520showing%2520sleek%2520finishes%2520and%2520contemporary%2520design.%2520The%2520image%2520highlights%2520the%2520clean%2520lines%2520and%2520reflective%2520qualities%2520of%2520these%2520materials%2520in%2520furniture.%2520Professional%2520product%2520photography%2520with%2520soft%2520lighting%2520emphasizing%2520the%2520modern%2520aesthetic%2520and%2520premium%2520quality.&width=600&height=300&seq=124&orientation=landscape"
+                  alt="Metal & Glass"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+              <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2">
+                  Metal & Glass
+                </h3>
+                <p class="text-gray-600 mb-4">
+                  Contemporary pieces featuring sleek metals and tempered glass
+                  accents.
+                </p>
+                <a
+                  href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+                  data-readdy="true"
+                  class="flex items-center text-primary font-medium"
+                >
+                  View Collection <i class="ri-arrow-right-line ml-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Popular Searches -->
+      <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-8">
+            Popular Searches
+          </h2>
+
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="px-4 py-2 bg-gray-100 rounded-full text-gray-800 hover:bg-primary hover:text-white transition-colors"
+              >Sectional Sofas</a
+            >
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="px-4 py-2 bg-gray-100 rounded-full text-gray-800 hover:bg-primary hover:text-white transition-colors"
+              >King Size Beds</a
+            >
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="px-4 py-2 bg-gray-100 rounded-full text-gray-800 hover:bg-primary hover:text-white transition-colors"
+              >Dining Sets</a
+            >
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="px-4 py-2 bg-gray-100 rounded-full text-gray-800 hover:bg-primary hover:text-white transition-colors"
+              >Office Chairs</a
+            >
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="px-4 py-2 bg-gray-100 rounded-full text-gray-800 hover:bg-primary hover:text-white transition-colors"
+              >Coffee Tables</a
+            >
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="px-4 py-2 bg-gray-100 rounded-full text-gray-800 hover:bg-primary hover:text-white transition-colors"
+              >Bookcases</a
+            >
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="px-4 py-2 bg-gray-100 rounded-full text-gray-800 hover:bg-primary hover:text-white transition-colors"
+              >TV Stands</a
+            >
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="px-4 py-2 bg-gray-100 rounded-full text-gray-800 hover:bg-primary hover:text-white transition-colors"
+              >Accent Chairs</a
+            >
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="px-4 py-2 bg-gray-100 rounded-full text-gray-800 hover:bg-primary hover:text-white transition-colors"
+              >Outdoor Sets</a
+            >
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="px-4 py-2 bg-gray-100 rounded-full text-gray-800 hover:bg-primary hover:text-white transition-colors"
+              >Nightstands</a
+            >
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="px-4 py-2 bg-gray-100 rounded-full text-gray-800 hover:bg-primary hover:text-white transition-colors"
+              >Dressers</a
+            >
+            <a
+              href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015"
+              data-readdy="true"
+              class="px-4 py-2 bg-gray-100 rounded-full text-gray-800 hover:bg-primary hover:text-white transition-colors"
+              >Bar Stools</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Newsletter Section -->
+      <section class="py-16 bg-primary bg-opacity-10">
+        <div class="container mx-auto px-4">
+          <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Get Inspired
+            </h2>
+            <p class="text-gray-700 mb-8">
+              Subscribe to our newsletter for the latest furniture trends,
+              design tips, and exclusive offers.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto">
+              <input
+                type="email"
+                placeholder="Your email address"
+                class="flex-grow px-4 py-3 rounded-lg border-none shadow-sm"
+              />
+              <button
+                class="px-6 py-3 bg-primary text-white font-medium !rounded-button whitespace-nowrap hover:bg-opacity-90 transition-colors"
+              >
+                Subscribe
+              </button>
+            </div>
+            <p class="text-gray-600 text-sm mt-4">
+              By subscribing, you agree to our Privacy Policy and consent to
+              receive updates from our company.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <!-- Company Info -->
+          <div>
+            <a
+              href="#"
+              class="text-3xl font-['Pacifico'] text-primary mb-6 inline-block"
+              >logo</a
+            >
+            <p class="text-gray-600 mb-6">
+              We create premium furniture that combines timeless design,
+              exceptional craftsmanship, and sustainable materials to transform
+              your living spaces.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors"
+              >
+                <i class="ri-facebook-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors"
+              >
+                <i class="ri-instagram-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors"
+              >
+                <i class="ri-pinterest-line"></i>
+              </a>
+              <a
+                href="#"
+                class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors"
+              >
+                <i class="ri-twitter-x-line"></i>
+              </a>
+            </div>
+          </div>
+          <!-- Quick Links -->
+          <div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-6">
+              Quick Links
+            </h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Blog & Articles</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Showrooms</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Careers</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Design Services</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Customer Service -->
+          <div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-6">
+              Customer Service
+            </h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >FAQ</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Shipping & Delivery</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Returns & Exchanges</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Warranty Information</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-600 hover:text-primary transition-colors"
+                  >Assembly Instructions</a
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Contact -->
+          <div>
+            <h4 class="text-lg font-semibold text-gray-900 mb-6">Contact Us</h4>
+            <ul class="space-y-3">
+              <li class="flex items-start">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-primary mt-1 mr-3"
+                >
+                  <i class="ri-map-pin-line"></i>
+                </div>
+                <span class="text-gray-600"
+                  >123 Furniture Ave, Design District, New York, NY 10001</span
+                >
+              </li>
+              <li class="flex items-center">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-primary mr-3"
+                >
+                  <i class="ri-phone-line"></i>
+                </div>
+                <span class="text-gray-600">(555) 123-4567</span>
+              </li>
+              <li class="flex items-center">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-primary mr-3"
+                >
+                  <i class="ri-mail-line"></i>
+                </div>
+                <span class="text-gray-600">info@elegancefurniture.com</span>
+              </li>
+              <li class="flex items-center">
+                <div
+                  class="w-5 h-5 flex items-center justify-center text-primary mr-3"
+                >
+                  <i class="ri-time-line"></i>
+                </div>
+                <span class="text-gray-600"
+                  >Mon-Sat: 10AM-8PM, Sun: 12PM-6PM</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="pt-8 border-t border-gray-200">
+          <div class="flex flex-col md:flex-row justify-between items-center">
+            <p class="text-gray-600 text-sm mb-4 md:mb-0">
+              © 2025 Elegance Furniture. All rights reserved.
+            </p>
+            <div class="flex items-center space-x-4">
+              <span class="text-gray-600 text-sm">Payment Methods:</span>
+              <div class="flex space-x-3">
+                <i class="ri-visa-fill ri-lg"></i>
+                <i class="ri-mastercard-fill ri-lg"></i>
+                <i class="ri-paypal-fill ri-lg"></i>
+                <i class="ri-apple-fill ri-lg"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script id="navigation-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const mobileMenuButton = document.querySelector("button.md\\:hidden");
+        const mobileMenu = document.createElement("div");
+        mobileMenu.className =
+          "fixed inset-0 bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out";
+        mobileMenu.innerHTML = `
+              <div class="flex justify-between items-center p-4 border-b">
+                  <a href="#" class="text-3xl font-['Pacifico'] text-primary">logo</a>
+                  <button class="w-10 h-10 flex items-center justify-center text-gray-700">
+                      <i class="ri-close-line ri-lg"></i>
+                  </button>
+              </div>
+              <nav class="p-4">
+                  <a href="#" class="block py-3 text-gray-800 hover:text-primary font-medium transition-colors">Home</a>
+                  <a href="https://readdy.ai/home/a4ef166d-8fee-457e-82e9-27e146b90f5e/b85bfd75-f06a-4d4c-893a-70e5cfc71015" data-readdy="true" class="block py-3 text-primary font-medium transition-colors">Categories</a>
+                  <a href="#" class="block py-3 text-gray-800 hover:text-primary font-medium transition-colors">Collections</a>
+                  <a href="#" class="block py-3 text-gray-800 hover:text-primary font-medium transition-colors">About</a>
+                  <a href="#" class="block py-3 text-gray-800 hover:text-primary font-medium transition-colors">Contact</a>
+                  <div class="mt-4">
+                      <a href="#" class="block w-full py-3 bg-primary text-white font-medium !rounded-button whitespace-nowrap text-center hover:bg-opacity-90 transition-colors">
+                          Get a Quote
+                      </a>
+                  </div>
+              </nav>
+          `;
+        document.body.appendChild(mobileMenu);
+
+        mobileMenuButton.addEventListener("click", function () {
+          mobileMenu.classList.remove("translate-x-full");
+        });
+
+        const closeButton = mobileMenu.querySelector("button");
+        closeButton.addEventListener("click", function () {
+          mobileMenu.classList.add("translate-x-full");
+        });
+      });
+    </script>
+
+    <script id="filter-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        // Color filter selection
+        const colorFilters = document.querySelectorAll(".color-filter");
+        if (colorFilters.length > 0) {
+          colorFilters.forEach((filter) => {
+            filter.addEventListener("click", function () {
+              this.classList.toggle("selected");
+            });
+          });
+        }
+
+        // Custom checkboxes and radio buttons
+        const customInputs = document.querySelectorAll(
+          ".custom-checkbox, .custom-radio",
+        );
+        if (customInputs.length > 0) {
+          customInputs.forEach((input) => {
+            input.addEventListener("change", function () {
+              // Additional logic can be added here if needed
+            });
+          });
+        }
+
+        // Mobile filter toggle
+        const filterToggleBtn = document.querySelector("button.p-3");
+        if (filterToggleBtn) {
+          filterToggleBtn.addEventListener("click", function () {
+            const filterModal = document.createElement("div");
+            filterModal.className =
+              "fixed inset-0 bg-black bg-opacity-50 z-50 flex items-end md:items-center justify-center";
+            filterModal.innerHTML = `
+                      <div class="bg-white rounded-t-xl md:rounded-xl w-full md:w-2/3 lg:w-1/2 max-h-[80vh] overflow-y-auto">
+                          <div class="flex justify-between items-center p-4 border-b sticky top-0 bg-white">
+                              <h3 class="text-lg font-semibold">Filter Categories</h3>
+                              <button class="w-10 h-10 flex items-center justify-center text-gray-700">
+                                  <i class="ri-close-line ri-lg"></i>
+                              </button>
+                          </div>
+                          <div class="p-4">
+                              <div class="mb-6">
+                                  <h4 class="text-base font-semibold mb-3">Room Type</h4>
+                                  <div class="space-y-2">
+                                      <label class="flex items-center">
+                                          <input type="checkbox" class="custom-checkbox mr-2">
+                                          <span>Living Room</span>
+                                      </label>
+                                      <label class="flex items-center">
+                                          <input type="checkbox" class="custom-checkbox mr-2">
+                                          <span>Bedroom</span>
+                                      </label>
+                                      <label class="flex items-center">
+                                          <input type="checkbox" class="custom-checkbox mr-2">
+                                          <span>Dining Room</span>
+                                      </label>
+                                      <label class="flex items-center">
+                                          <input type="checkbox" class="custom-checkbox mr-2">
+                                          <span>Home Office</span>
+                                      </label>
+                                      <label class="flex items-center">
+                                          <input type="checkbox" class="custom-checkbox mr-2">
+                                          <span>Outdoor</span>
+                                      </label>
+                                  </div>
+                              </div>
+                              <div class="mb-6">
+                                  <h4 class="text-base font-semibold mb-3">Style</h4>
+                                  <div class="space-y-2">
+                                      <label class="flex items-center">
+                                          <input type="checkbox" class="custom-checkbox mr-2">
+                                          <span>Modern</span>
+                                      </label>
+                                      <label class="flex items-center">
+                                          <input type="checkbox" class="custom-checkbox mr-2">
+                                          <span>Traditional</span>
+                                      </label>
+                                      <label class="flex items-center">
+                                          <input type="checkbox" class="custom-checkbox mr-2">
+                                          <span>Mid-Century</span>
+                                      </label>
+                                      <label class="flex items-center">
+                                          <input type="checkbox" class="custom-checkbox mr-2">
+                                          <span>Scandinavian</span>
+                                      </label>
+                                      <label class="flex items-center">
+                                          <input type="checkbox" class="custom-checkbox mr-2">
+                                          <span>Industrial</span>
+                                      </label>
+                                  </div>
+                              </div>
+                              <div class="flex justify-end gap-3 mt-6">
+                                  <button class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700">Reset</button>
+                                  <button class="px-4 py-2 bg-primary text-white rounded-lg">Apply Filters</button>
+                              </div>
+                          </div>
+                      </div>
+                  `;
+            document.body.appendChild(filterModal);
+
+            const closeModalBtn = filterModal.querySelector("button");
+            closeModalBtn.addEventListener("click", function () {
+              document.body.removeChild(filterModal);
+            });
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
