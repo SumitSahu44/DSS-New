@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ronak Rudra Security & Management Services</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#0a2463',secondary:'#d4af37'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://readdy.ai/api/search-image?query=professional%20security%20personnel%20in%20dark%20blue%20uniforms%20standing%20in%20formation%20with%20a%20modern%20corporate%20building%20in%20the%20background%2C%20clean%20professional%20image%20with%20navy%20blue%20and%20gold%20accents%2C%20dramatic%20lighting%2C%20high-end%20corporate%20security%2C%20professional%20atmosphere&width=1920&height=1080&seq=hero1&orientation=landscape');
+            background-size: cover;
+            background-position: center;
+        }
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-delay-1 { transition-delay: 0.1s; }
+        .stagger-delay-2 { transition-delay: 0.2s; }
+        .stagger-delay-3 { transition-delay: 0.3s; }
+        .stagger-delay-4 { transition-delay: 0.4s; }
+        
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .counter-value {
+            display: inline-block;
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .testimonial-slider {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+        .testimonial-slider::-webkit-scrollbar {
+            display: none;
+        }
+        .testimonial-slide {
+            scroll-snap-align: start;
+        }
+        
+        input:not([type="checkbox"]):focus, 
+        textarea:focus {
+            outline: none;
+            border-color: #0a2463;
+        }
+        
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .custom-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #0a2463;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .custom-checkbox:checked {
+            background-color: #0a2463;
+        }
+        
+        .custom-checkbox:checked::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 6px;
+            width: 6px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="bg-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <span class="text-3xl font-['Pacifico'] text-white">logo</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-white hover:text-secondary font-medium transition-colors">Home</a>
+                <a href="#about" class="text-white hover:text-secondary font-medium transition-colors">About</a>
+                <a href="#services" class="text-white hover:text-secondary font-medium transition-colors">Services</a>
+                <a href="#why-us" class="text-white hover:text-secondary font-medium transition-colors">Why Us</a>
+                <a href="#testimonials" class="text-white hover:text-secondary font-medium transition-colors">Clients</a>
+                <a href="#contact" class="text-white hover:text-secondary font-medium transition-colors">Contact</a>
+            </div>
+            <div class="md:hidden flex items-center">
+                <button id="mobile-menu-button" class="text-white w-10 h-10 flex items-center justify-center">
+                    <i class="ri-menu-line ri-2x"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden bg-white shadow-lg absolute w-full left-0 top-full hidden">
+            <div class="container mx-auto px-6 py-4 flex flex-col space-y-4">
+                <a href="#home" class="text-primary hover:text-secondary font-medium transition-colors">Home</a>
+                <a href="#about" class="text-primary hover:text-secondary font-medium transition-colors">About</a>
+                <a href="#services" class="text-primary hover:text-secondary font-medium transition-colors">Services</a>
+                <a href="#why-us" class="text-primary hover:text-secondary font-medium transition-colors">Why Us</a>
+                <a href="#testimonials" class="text-primary hover:text-secondary font-medium transition-colors">Clients</a>
+                <a href="#contact" class="text-primary hover:text-secondary font-medium transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section h-screen flex items-center justify-center">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 animate-on-scroll visible">Ronak Rudra Security & Management Services</h1>
+            <p class="text-xl md:text-2xl text-white mb-10 max-w-3xl mx-auto animate-on-scroll visible stagger-delay-1">Your Trusted Partner in Security & Manpower Solutions.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-on-scroll visible stagger-delay-2">
+                <a href="#contact" class="bg-primary hover:bg-opacity-90 text-white px-8 py-3 rounded-button font-medium transition-all whitespace-nowrap">Get a Quote</a>
+                <a href="#services" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary px-8 py-3 rounded-button font-medium transition-all whitespace-nowrap">Our Services</a>
+            </div>
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator">
+                <a href="#about" class="text-white w-10 h-10 flex items-center justify-center">
+                    <i class="ri-arrow-down-line ri-2x"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4 animate-on-scroll">About Ronak Rudra</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto mb-6 animate-on-scroll stagger-delay-1"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto animate-on-scroll stagger-delay-2">Established in 2010, we've been providing top-tier security and manpower solutions to businesses across industries. Our commitment to excellence has made us a trusted partner for over 500 clients nationwide.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="animate-on-scroll">
+                    <h3 class="text-2xl font-semibold text-primary mb-6">Our Mission</h3>
+                    <p class="text-gray-600 mb-6">To provide unparalleled security and manpower services that exceed client expectations through innovation, integrity, and excellence in every aspect of our operations.</p>
+                    
+                    <h3 class="text-2xl font-semibold text-primary mb-6">Our Vision</h3>
+                    <p class="text-gray-600 mb-6">To be recognized as the industry leader in security and manpower solutions, setting new standards for quality, reliability, and customer satisfaction.</p>
+                    
+                    <div class="flex items-center mt-8">
+                        <a href="#contact" class="bg-primary hover:bg-opacity-90 text-white px-8 py-3 rounded-button font-medium transition-all whitespace-nowrap">Learn More About Us</a>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center animate-on-scroll">
+                        <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="ri-team-line ri-2x text-primary"></i>
+                        </div>
+                        <h4 class="text-4xl font-bold text-primary mb-2"><span class="counter-value" data-target="1500">0</span>+</h4>
+                        <p class="text-gray-600">Security Personnel</p>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center animate-on-scroll stagger-delay-1">
+                        <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="ri-building-line ri-2x text-primary"></i>
+                        </div>
+                        <h4 class="text-4xl font-bold text-primary mb-2"><span class="counter-value" data-target="500">0</span>+</h4>
+                        <p class="text-gray-600">Client Companies</p>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-lg shadow-lg text-center animate-on-scroll stagger-delay-2">
+                        <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="ri-map-pin-line ri-2x text-primary"></i>
+                        </div>
+                        <h4 class="text-4xl font-bold text-primary mb-2"><span class="counter-value" data-target="25">0</span>+</h4>
+                        <p class="text-gray-600">Cities Covered</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4 animate-on-scroll">Our Services</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto mb-6 animate-on-scroll stagger-delay-1"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto animate-on-scroll stagger-delay-2">We offer comprehensive security and manpower solutions tailored to meet your specific requirements.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-primary mb-6 animate-on-scroll">Security Services</h3>
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="service-card bg-white p-6 rounded-lg shadow-md animate-on-scroll">
+                            <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                                <i class="ri-shield-check-line ri-lg text-primary"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-primary mb-2">Corporate Security</h4>
+                            <p class="text-gray-600 mb-4">Comprehensive security solutions for corporate buildings, offices, and commercial establishments with trained personnel.</p>
+                            <a href="#contact" class="text-primary hover:text-secondary font-medium inline-flex items-center transition-colors">
+                                Learn More <i class="ri-arrow-right-line ml-1"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="service-card bg-white p-6 rounded-lg shadow-md animate-on-scroll stagger-delay-1">
+                            <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                                <i class="ri-home-gear-line ri-lg text-primary"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-primary mb-2">Residential Security</h4>
+                            <p class="text-gray-600 mb-4">Dedicated security services for residential complexes, apartments, and individual homes with 24/7 monitoring.</p>
+                            <a href="#contact" class="text-primary hover:text-secondary font-medium inline-flex items-center transition-colors">
+                                Learn More <i class="ri-arrow-right-line ml-1"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="service-card bg-white p-6 rounded-lg shadow-md animate-on-scroll stagger-delay-2">
+                            <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                                <i class="ri-camera-line ri-lg text-primary"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-primary mb-2">Electronic Surveillance</h4>
+                            <p class="text-gray-600 mb-4">Advanced CCTV monitoring, access control systems, and integrated security technology solutions.</p>
+                            <a href="#contact" class="text-primary hover:text-secondary font-medium inline-flex items-center transition-colors">
+                                Learn More <i class="ri-arrow-right-line ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-semibold text-primary mb-6 animate-on-scroll">Manpower Services</h3>
+                    <div class="grid grid-cols-1 gap-6">
+                        <div class="service-card bg-white p-6 rounded-lg shadow-md animate-on-scroll">
+                            <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                                <i class="ri-user-search-line ri-lg text-primary"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-primary mb-2">Staffing Solutions</h4>
+                            <p class="text-gray-600 mb-4">Temporary, permanent, and contract staffing solutions across various industries with vetted professionals.</p>
+                            <a href="#contact" class="text-primary hover:text-secondary font-medium inline-flex items-center transition-colors">
+                                Learn More <i class="ri-arrow-right-line ml-1"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="service-card bg-white p-6 rounded-lg shadow-md animate-on-scroll stagger-delay-1">
+                            <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                                <i class="ri-calendar-check-line ri-lg text-primary"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-primary mb-2">Event Management</h4>
+                            <p class="text-gray-600 mb-4">Specialized security and staff for events, conferences, exhibitions, and public gatherings with detailed planning.</p>
+                            <a href="#contact" class="text-primary hover:text-secondary font-medium inline-flex items-center transition-colors">
+                                Learn More <i class="ri-arrow-right-line ml-1"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="service-card bg-white p-6 rounded-lg shadow-md animate-on-scroll stagger-delay-2">
+                            <div class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                                <i class="ri-briefcase-line ri-lg text-primary"></i>
+                            </div>
+                            <h4 class="text-xl font-semibold text-primary mb-2">Executive Protection</h4>
+                            <p class="text-gray-600 mb-4">Personalized security services for executives, VIPs, and high-profile individuals with trained bodyguards.</p>
+                            <a href="#contact" class="text-primary hover:text-secondary font-medium inline-flex items-center transition-colors">
+                                Learn More <i class="ri-arrow-right-line ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-us" class="py-20 bg-gray-50 parallax" style="background-image: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://readdy.ai/api/search-image?query=abstract%20professional%20business%20background%20with%20subtle%20navy%20blue%20and%20gold%20geometric%20patterns%2C%20clean%20modern%20corporate%20design%2C%20professional%20atmosphere%2C%20subtle%20texture%2C%20high-end%20business%20aesthetic&width=1920&height=1080&seq=whyus1&orientation=landscape')">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4 animate-on-scroll">Why Choose Us</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto mb-6 animate-on-scroll stagger-delay-1"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto animate-on-scroll stagger-delay-2">We pride ourselves on delivering exceptional service that sets us apart from the competition.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md animate-on-scroll">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-24-hours-line ri-2x text-primary"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-primary mb-2">24/7 Support</h4>
+                    <p class="text-gray-600">Round-the-clock assistance and monitoring to ensure your security needs are always met, no matter the time.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md animate-on-scroll stagger-delay-1">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-medal-line ri-2x text-primary"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-primary mb-2">Certified Staff</h4>
+                    <p class="text-gray-600">All our personnel undergo rigorous training and certification to ensure the highest standards of professionalism.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md animate-on-scroll stagger-delay-2">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-settings-line ri-2x text-primary"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-primary mb-2">Custom Solutions</h4>
+                    <p class="text-gray-600">Tailored security and manpower plans designed specifically to address your unique requirements and challenges.</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md animate-on-scroll stagger-delay-3">
+                    <div class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-shield-star-line ri-2x text-primary"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold text-primary mb-2">Reliability</h4>
+                    <p class="text-gray-600">With over a decade of experience, we've built a reputation for dependability and excellence in every service we provide.</p>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <a href="#contact" class="bg-primary hover:bg-opacity-90 text-white px-8 py-3 rounded-button font-medium transition-all animate-on-scroll whitespace-nowrap">Get Started Today</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4 animate-on-scroll">What Our Clients Say</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto mb-6 animate-on-scroll stagger-delay-1"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto animate-on-scroll stagger-delay-2">Hear from businesses that have transformed their security and manpower management with our services.</p>
+            </div>
+            
+            <div class="relative">
+                <div class="testimonial-slider flex space-x-6 pb-8 animate-on-scroll">
+                    <div class="testimonial-slide min-w-[300px] md:min-w-[400px] bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="text-yellow-400 flex">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-6">"Ronak Rudra has been instrumental in enhancing our corporate security infrastructure. Their team is professional, vigilant, and always goes above and beyond to ensure our premises are secure."</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-user-line ri-lg text-gray-500"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-primary">Rajiv Mehta</h5>
+                                <p class="text-gray-500 text-sm">Facilities Director, Horizon Technologies</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-slide min-w-[300px] md:min-w-[400px] bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="text-yellow-400 flex">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-6">"We've been working with Ronak Rudra for our residential complex security for over 5 years. Their staff is well-trained, courteous, and extremely efficient. Highly recommended!"</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-user-line ri-lg text-gray-500"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-primary">Priya Sharma</h5>
+                                <p class="text-gray-500 text-sm">President, Greenview Residents Association</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-slide min-w-[300px] md:min-w-[400px] bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="text-yellow-400 flex">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-6">"For our annual tech conference, we needed specialized security personnel who could handle large crowds while maintaining a professional demeanor. Ronak Rudra delivered exceptionally."</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-user-line ri-lg text-gray-500"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-primary">Vikram Patel</h5>
+                                <p class="text-gray-500 text-sm">Event Director, TechSummit India</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-slide min-w-[300px] md:min-w-[400px] bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-center mb-4">
+                            <div class="text-yellow-400 flex">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-half-fill"></i>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-6">"The staffing solutions provided by Ronak Rudra have significantly improved our operational efficiency. Their team understands our industry and provides qualified personnel."</p>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-user-line ri-lg text-gray-500"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-primary">Ananya Desai</h5>
+                                <p class="text-gray-500 text-sm">HR Manager, Global Logistics Ltd.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center mt-8">
+                    <button id="prev-testimonial" class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center mr-4 hover:bg-opacity-90 transition-all">
+                        <i class="ri-arrow-left-s-line"></i>
+                    </button>
+                    <button id="next-testimonial" class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center hover:bg-opacity-90 transition-all">
+                        <i class="ri-arrow-right-s-line"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="mt-20">
+                <h3 class="text-2xl font-semibold text-primary mb-8 text-center animate-on-scroll">Trusted By Industry Leaders</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 items-center">
+                    <div class="flex items-center justify-center animate-on-scroll">
+                        <div class="w-16 h-16 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
+                            <i class="ri-building-4-line ri-3x"></i>
+                        </div>
+                        <span class="ml-2 text-gray-600 font-medium">TechCorp</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-center animate-on-scroll stagger-delay-1">
+                        <div class="w-16 h-16 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
+                            <i class="ri-hotel-line ri-3x"></i>
+                        </div>
+                        <span class="ml-2 text-gray-600 font-medium">LuxStay</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-center animate-on-scroll stagger-delay-2">
+                        <div class="w-16 h-16 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
+                            <i class="ri-bank-line ri-3x"></i>
+                        </div>
+                        <span class="ml-2 text-gray-600 font-medium">FinTrust</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-center animate-on-scroll stagger-delay-3">
+                        <div class="w-16 h-16 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
+                            <i class="ri-shopping-bag-line ri-3x"></i>
+                        </div>
+                        <span class="ml-2 text-gray-600 font-medium">MegaMart</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-center animate-on-scroll stagger-delay-4">
+                        <div class="w-16 h-16 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
+                            <i class="ri-hospital-line ri-3x"></i>
+                        </div>
+                        <span class="ml-2 text-gray-600 font-medium">CarePlus</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-center animate-on-scroll stagger-delay-4">
+                        <div class="w-16 h-16 flex items-center justify-center text-gray-400 hover:text-primary transition-colors">
+                            <i class="ri-government-line ri-3x"></i>
+                        </div>
+                        <span class="ml-2 text-gray-600 font-medium">GovSec</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4 animate-on-scroll">Contact Us</h2>
+                <div class="w-20 h-1 bg-secondary mx-auto mb-6 animate-on-scroll stagger-delay-1"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto animate-on-scroll stagger-delay-2">Get in touch with our team to discuss your security and manpower requirements.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="animate-on-scroll">
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-semibold text-primary mb-6">Get In Touch</h3>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="ri-map-pin-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-gray-800 mb-1">Our Location</h5>
+                                <p class="text-gray-600">1234 Security Avenue, Corporate Park<br>Mumbai, Maharashtra 400001, India</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="ri-phone-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-gray-800 mb-1">Call Us</h5>
+                                <p class="text-gray-600">+91 98765 43210 (General Inquiries)<br>+91 98765 43211 (Emergency Support)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start mb-6">
+                            <div class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="ri-mail-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-gray-800 mb-1">Email Us</h5>
+                                <p class="text-gray-600">info@ronakrudra.com<br>support@ronakrudra.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mr-4 mt-1">
+                                <i class="ri-time-line text-primary"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-semibold text-gray-800 mb-1">Working Hours</h5>
+                                <p class="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 1:00 PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h5 class="font-semibold text-gray-800 mb-4">Follow Us</h5>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="ri-facebook-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="ri-twitter-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="ri-linkedin-fill"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg-primary bg-opacity-10 rounded-full flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+                                    <i class="ri-instagram-fill"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="animate-on-scroll stagger-delay-1">
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-2xl font-semibold text-primary mb-6">Send Us a Message</h3>
+                        <form id="contact-form">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                                <div>
+                                    <label for="name" class="block text-gray-700 mb-2">Full Name</label>
+                                    <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary" placeholder="Your name">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-gray-700 mb-2">Email Address</label>
+                                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary" placeholder="Your email">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="phone" class="block text-gray-700 mb-2">Phone Number</label>
+                                <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary" placeholder="Your phone number">
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="service" class="block text-gray-700 mb-2">Service Interested In</label>
+                                <div class="relative">
+                                    <select id="service" class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary appearance-none pr-8">
+                                        <option value="">Select a service</option>
+                                        <option value="corporate-security">Corporate Security</option>
+                                        <option value="residential-security">Residential Security</option>
+                                        <option value="electronic-surveillance">Electronic Surveillance</option>
+                                        <option value="staffing-solutions">Staffing Solutions</option>
+                                        <option value="event-management">Event Management</option>
+                                        <option value="executive-protection">Executive Protection</option>
+                                    </select>
+                                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                        <i class="ri-arrow-down-s-line text-gray-500"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 mb-2">Your Message</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-2 border border-gray-300 rounded focus:border-primary" placeholder="Tell us about your requirements"></textarea>
+                            </div>
+                            
+                            <div class="mb-6 flex items-start">
+                                <input type="checkbox" id="consent" class="custom-checkbox mr-3 mt-1">
+                                <label for="consent" class="text-gray-600 text-sm">I consent to Ronak Rudra processing my personal data in accordance with their Privacy Policy.</label>
+                            </div>
+                            
+                            <button type="submit" class="bg-primary hover:bg-opacity-90 text-white px-8 py-3 rounded-button font-medium transition-all w-full sm:w-auto whitespace-nowrap">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 animate-on-scroll">
+                <div class="bg-white p-4 rounded-lg shadow-md h-[400px] overflow-hidden">
+                    <div class="h-full w-full" style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-position: center; background-size: cover;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div>
+                    <div class="text-3xl font-['Pacifico'] mb-4">logo</div>
+                    <p class="text-gray-300 mb-6">Ronak Rudra Security & Management Services provides comprehensive security and manpower solutions tailored to meet your specific requirements.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-primary transition-all">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-primary transition-all">
+                            <i class="ri-twitter-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-primary transition-all">
+                            <i class="ri-linkedin-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 border border-gray-300 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-primary transition-all">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#services" class="text-gray-300 hover:text-white transition-colors">Our Services</a></li>
+                        <li><a href="#why-us" class="text-gray-300 hover:text-white transition-colors">Why Choose Us</a></li>
+                        <li><a href="#testimonials" class="text-gray-300 hover:text-white transition-colors">Testimonials</a></li>
+                        <li><a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-semibold mb-6">Newsletter</h4>
+                    <p class="text-gray-300 mb-4">Subscribe to our newsletter to receive updates and security tips.</p>
+                    <form id="newsletter-form" class="mb-4">
+                        <div class="flex">
+                            <input type="email" placeholder="Your email address" class="px-4 py-2 rounded-l-button w-full text-gray-800 border-none focus:outline-none">
+                            <button type="submit" class="bg-secondary hover:bg-opacity-90 text-white px-4 py-2 rounded-r-button whitespace-nowrap">Subscribe</button>
+                        </div>
+                    </form>
+                    <p class="text-gray-300 text-sm">We respect your privacy. Your information is safe with us.</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-300 text-sm mb-4 md:mb-0">© 2025 Ronak Rudra Security & Management Services. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-300 hover:text-white text-sm transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-300 hover:text-white text-sm transition-colors">Terms of Service</a>
+                    <a href="#" class="text-gray-300 hover:text-white text-sm transition-colors">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all z-50">
+        <i class="ri-arrow-up-line ri-lg"></i>
+    </button>
+
+    <script id="navigation-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.getElementById('navbar');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-primary', 'shadow-md');
+                    navbar.classList.remove('bg-transparent');
+                } else {
+                    navbar.classList.remove('bg-primary', 'shadow-md');
+                    navbar.classList.add('bg-transparent');
+                }
+            });
+            
+            // Initial check for navbar
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-primary', 'shadow-md');
+                navbar.classList.remove('bg-transparent');
+            }
+            
+            // Mobile menu toggle
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when clicking on a link
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+            
+            // Smooth scrolling for all anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script id="scroll-animations-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.animate-on-scroll');
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                return (
+                    rect.top <= (window.innerHeight || document.documentElement.clientHeight) * 0.85
+                );
+            }
+            
+            // Function to handle scroll animations
+            function handleScrollAnimations() {
+                animatedElements.forEach(element => {
+                    if (isInViewport(element) && !element.classList.contains('visible')) {
+                        element.classList.add('visible');
+                    }
+                });
+                
+                // Back to top button visibility
+                if (window.scrollY > 500) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                }
+            }
+            
+            // Initial check for elements in viewport
+            handleScrollAnimations();
+            
+            // Listen for scroll events
+            window.addEventListener('scroll', handleScrollAnimations);
+            
+            // Back to top button functionality
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <script id="counter-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const counterElements = document.querySelectorAll('.counter-value');
+            
+            function startCounters() {
+                counterElements.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const duration = 2000; // 2 seconds
+                    const stepTime = 50; // update every 50ms
+                    const totalSteps = duration / stepTime;
+                    const stepValue = target / totalSteps;
+                    let currentValue = 0;
+                    
+                    const timer = setInterval(() => {
+                        currentValue += stepValue;
+                        counter.textContent = Math.floor(currentValue);
+                        
+                        if (currentValue >= target) {
+                            counter.textContent = target;
+                            clearInterval(timer);
+                        }
+                    }, stepTime);
+                });
+            }
+            
+            // Start counters when they come into view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startCounters();
+                        observer.disconnect();
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            if (counterElements.length > 0) {
+                observer.observe(counterElements[0].parentElement.parentElement);
+            }
+        });
+    </script>
+
+    <script id="testimonial-slider-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.testimonial-slider');
+            const prevButton = document.getElementById('prev-testimonial');
+            const nextButton = document.getElementById('next-testimonial');
+            const slideWidth = document.querySelector('.testimonial-slide').offsetWidth + 24; // width + gap
+            
+            // Next button click
+            nextButton.addEventListener('click', function() {
+                slider.scrollBy({
+                    left: slideWidth,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Previous button click
+            prevButton.addEventListener('click', function() {
+                slider.scrollBy({
+                    left: -slideWidth,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+    <script id="form-validation-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contact-form');
+            const newsletterForm = document.getElementById('newsletter-form');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Simple validation
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    const message = document.getElementById('message').value;
+                    const consent = document.getElementById('consent').checked;
+                    
+                    if (!name || !email || !message || !consent) {
+                        alert('Please fill in all required fields and accept the privacy policy.');
+                        return;
+                    }
+                    
+                    // Simulate form submission
+                    const submitButton = contactForm.querySelector('button[type="submit"]');
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<i class="ri-loader-4-line animate-spin mr-2"></i> Sending...';
+                    
+                    setTimeout(() => {
+                        alert('Thank you for your message! We will get back to you soon.');
+                        contactForm.reset();
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = 'Send Message';
+                    }, 1500);
+                });
+            }
+            
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const email = newsletterForm.querySelector('input[type="email"]').value;
+                    
+                    if (!email) {
+                        alert('Please enter your email address.');
+                        return;
+                    }
+                    
+                    // Simulate form submission
+                    const submitButton = newsletterForm.querySelector('button[type="submit"]');
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<i class="ri-loader-4-line animate-spin mr-2"></i>';
+                    
+                    setTimeout(() => {
+                        alert('Thank you for subscribing to our newsletter!');
+                        newsletterForm.reset();
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = 'Subscribe';
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
