@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Resort & Spa</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#3B82F6',secondary:'#64748B'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-section {
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.8) 30%, rgba(255, 255, 255, 0.1) 100%), url('https://readdy.ai/api/search-image?query=A%20luxurious%20beachside%20resort%20view%20with%20crystal%20clear%20turquoise%20water%2C%20white%20sandy%20beach%2C%20palm%20trees%20swaying%20in%20the%20breeze%2C%20elegant%20resort%20buildings%20in%20the%20background%2C%20perfect%20sunny%20day%20with%20blue%20sky%20and%20few%20clouds%2C%20natural%20lighting%2C%20professional%20photography%2C%20high-end%20travel%20magazine%20quality&width=1920&height=1080&seq=1&orientation=landscape');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .navbar {
+            transition: background-color 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .booking-form {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .room-card:hover img {
+            transform: scale(1.05);
+            transition: transform 0.5s ease;
+        }
+        
+        .room-card img {
+            transition: transform 0.5s ease;
+        }
+        
+        .testimonial-card {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .gallery-item {
+            overflow: hidden;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .date-input {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+        
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        
+        .custom-checkbox {
+            position: relative;
+            padding-left: 30px;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .custom-checkbox input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 20px;
+            width: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .custom-checkbox:hover input ~ .checkmark {
+            background-color: #f9fafb;
+        }
+        
+        .custom-checkbox input:checked ~ .checkmark {
+            background-color: #3B82F6;
+            border-color: #3B82F6;
+        }
+        
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+        
+        .custom-checkbox input:checked ~ .checkmark:after {
+            display: block;
+        }
+        
+        .custom-checkbox .checkmark:after {
+            left: 7px;
+            top: 3px;
+            width: 6px;
+            height: 11px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        
+        .custom-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 26px;
+        }
+        
+        .custom-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #3B82F6;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Navbar -->
+    <nav class="navbar fixed top-0 left-0 w-full z-50 py-4 px-6 transition-all duration-300">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-3xl font-['Pacifico'] text-primary">logo</a>
+            
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="#" class="font-medium hover:text-primary transition-colors">Home</a>
+                <a href="#" class="font-medium hover:text-primary transition-colors">Rooms</a>
+                <a href="#" class="font-medium hover:text-primary transition-colors">Amenities</a>
+                <a href="#" class="font-medium hover:text-primary transition-colors">Gallery</a>
+                <a href="#" class="font-medium hover:text-primary transition-colors">Contact</a>
+                <button class="bg-primary text-white px-6 py-2.5 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Book Now</button>
+            </div>
+            
+            <button class="lg:hidden w-10 h-10 flex items-center justify-center">
+                <i class="ri-menu-line ri-lg"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section w-full min-h-screen flex items-center pt-20">
+        <div class="container mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class="flex flex-col justify-center">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">Experience Luxury <br>By The Ocean</h1>
+                <p class="text-lg mb-8 max-w-xl">Indulge in the ultimate beachfront getaway with world-class amenities, breathtaking views, and unparalleled service.</p>
+                <div class="flex flex-wrap gap-4">
+                    <button class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Explore Rooms</button>
+                    <button class="border border-gray-300 px-8 py-3 !rounded-button font-medium hover:bg-gray-50 transition-all whitespace-nowrap">View Gallery</button>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-center">
+                <div class="booking-form w-full max-w-md p-6 rounded-lg">
+                    <h3 class="text-2xl font-bold mb-6">Book Your Stay</h3>
+                    <form>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Check-in</label>
+                            <input type="date" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent date-input" min="2025-05-05">
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium mb-2">Check-out</label>
+                            <input type="date" class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent date-input" min="2025-05-06">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Adults</label>
+                                <div class="relative">
+                                    <select class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none pr-8">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+                                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                        <i class="ri-arrow-down-s-line"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Children</label>
+                                <div class="relative">
+                                    <select class="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none pr-8">
+                                        <option>0</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select>
+                                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                                        <i class="ri-arrow-down-s-line"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-primary text-white py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Check Availability</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Rooms -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Luxurious Accommodations</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Discover our collection of elegantly appointed rooms and suites, each designed to provide the ultimate comfort and relaxation.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Room Card 1 -->
+                <div class="room-card bg-white rounded-lg overflow-hidden shadow-md transition-all hover:shadow-xl">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=Luxury%20oceanfront%20hotel%20suite%20with%20king-size%20bed%2C%20elegant%20furnishings%2C%20large%20windows%20with%20ocean%20view%2C%20soft%20natural%20lighting%2C%20neutral%20color%20palette%20with%20blue%20accents%2C%20plush%20bedding%2C%20modern%20amenities%2C%20spacious%20and%20airy%20feeling%2C%20professional%20hotel%20photography%2C%20no%20people&width=600&height=400&seq=2&orientation=landscape" alt="Deluxe Ocean View" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="text-xl font-bold">Deluxe Ocean View</h3>
+                            <p class="text-primary font-semibold">$499 <span class="text-sm text-gray-500 font-normal">/ night</span></p>
+                        </div>
+                        <p class="text-gray-600 mb-4">Immerse yourself in luxury with breathtaking ocean views from your private balcony.</p>
+                        <ul class="mb-6 space-y-2">
+                            <li class="flex items-center text-sm text-gray-600">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-check-line text-primary"></i>
+                                </div>
+                                King-size bed
+                            </li>
+                            <li class="flex items-center text-sm text-gray-600">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-check-line text-primary"></i>
+                                </div>
+                                Ocean view balcony
+                            </li>
+                            <li class="flex items-center text-sm text-gray-600">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-check-line text-primary"></i>
+                                </div>
+                                Luxury bathroom
+                            </li>
+                        </ul>
+                        <button class="w-full bg-primary text-white py-2.5 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Book Now</button>
+                    </div>
+                </div>
+                
+                <!-- Room Card 2 -->
+                <div class="room-card bg-white rounded-lg overflow-hidden shadow-md transition-all hover:shadow-xl">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=Luxury%20beachfront%20villa%20suite%20with%20private%20pool%2C%20elegant%20tropical%20design%2C%20spacious%20living%20area%2C%20premium%20furnishings%2C%20floor-to-ceiling%20windows%2C%20ocean%20view%2C%20palm%20trees%20visible%2C%20bright%20natural%20lighting%2C%20high-end%20resort%20photography%2C%20no%20people&width=600&height=400&seq=3&orientation=landscape" alt="Premium Suite" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="text-xl font-bold">Premium Suite</h3>
+                            <p class="text-primary font-semibold">$699 <span class="text-sm text-gray-500 font-normal">/ night</span></p>
+                        </div>
+                        <p class="text-gray-600 mb-4">Experience unparalleled luxury in our spacious premium suites with separate living areas.</p>
+                        <ul class="mb-6 space-y-2">
+                            <li class="flex items-center text-sm text-gray-600">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-check-line text-primary"></i>
+                                </div>
+                                Separate living room
+                            </li>
+                            <li class="flex items-center text-sm text-gray-600">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-check-line text-primary"></i>
+                                </div>
+                                Panoramic ocean views
+                            </li>
+                            <li class="flex items-center text-sm text-gray-600">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-check-line text-primary"></i>
+                                </div>
+                                Premium amenities
+                            </li>
+                        </ul>
+                        <button class="w-full bg-primary text-white py-2.5 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Book Now</button>
+                    </div>
+                </div>
+                
+                <!-- Room Card 3 -->
+                <div class="room-card bg-white rounded-lg overflow-hidden shadow-md transition-all hover:shadow-xl">
+                    <div class="h-64 overflow-hidden">
+                        <img src="https://readdy.ai/api/search-image?query=Luxury%20beachfront%20presidential%20villa%20with%20private%20infinity%20pool%2C%20expansive%20terrace%2C%20elegant%20tropical%20luxury%20design%2C%20panoramic%20ocean%20views%2C%20palm%20trees%2C%20high-end%20furnishings%2C%20spacious%20bedroom%20and%20living%20areas%2C%20premium%20resort%20photography%2C%20no%20people&width=600&height=400&seq=4&orientation=landscape" alt="Beachfront Villa" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex justify-between items-center mb-3">
+                            <h3 class="text-xl font-bold">Beachfront Villa</h3>
+                            <p class="text-primary font-semibold">$1,299 <span class="text-sm text-gray-500 font-normal">/ night</span></p>
+                        </div>
+                        <p class="text-gray-600 mb-4">Our exclusive beachfront villas offer ultimate privacy with direct beach access.</p>
+                        <ul class="mb-6 space-y-2">
+                            <li class="flex items-center text-sm text-gray-600">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-check-line text-primary"></i>
+                                </div>
+                                Private plunge pool
+                            </li>
+                            <li class="flex items-center text-sm text-gray-600">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-check-line text-primary"></i>
+                                </div>
+                                Direct beach access
+                            </li>
+                            <li class="flex items-center text-sm text-gray-600">
+                                <div class="w-5 h-5 flex items-center justify-center mr-2">
+                                    <i class="ri-check-line text-primary"></i>
+                                </div>
+                                Butler service
+                            </li>
+                        </ul>
+                        <button class="w-full bg-primary text-white py-2.5 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Book Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                    View All Accommodations
+                    <div class="w-5 h-5 flex items-center justify-center ml-1">
+                        <i class="ri-arrow-right-line"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Amenities Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Resort Amenities</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Enjoy our world-class facilities designed to enhance your stay and create unforgettable memories.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Amenity 1 -->
+                <div class="bg-gray-50 rounded-lg p-6 text-center transition-all hover:shadow-md">
+                    <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-blue-50 rounded-full text-primary">
+                        <i class="ri-water-flash-line ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Infinity Pool</h3>
+                    <p class="text-gray-600">Enjoy our stunning oceanfront infinity pool with panoramic views of the crystal-clear waters.</p>
+                </div>
+                
+                <!-- Amenity 2 -->
+                <div class="bg-gray-50 rounded-lg p-6 text-center transition-all hover:shadow-md">
+                    <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-blue-50 rounded-full text-primary">
+                        <i class="ri-spa-line ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Luxury Spa</h3>
+                    <p class="text-gray-600">Indulge in rejuvenating treatments at our award-winning spa with private treatment rooms.</p>
+                </div>
+                
+                <!-- Amenity 3 -->
+                <div class="bg-gray-50 rounded-lg p-6 text-center transition-all hover:shadow-md">
+                    <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-blue-50 rounded-full text-primary">
+                        <i class="ri-restaurant-line ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Fine Dining</h3>
+                    <p class="text-gray-600">Savor exquisite cuisine at our three signature restaurants featuring local and international dishes.</p>
+                </div>
+                
+                <!-- Amenity 4 -->
+                <div class="bg-gray-50 rounded-lg p-6 text-center transition-all hover:shadow-md">
+                    <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-blue-50 rounded-full text-primary">
+                        <i class="ri-sailboat-line ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Water Sports</h3>
+                    <p class="text-gray-600">Experience thrilling water activities including snorkeling, kayaking, and paddleboarding.</p>
+                </div>
+                
+                <!-- Amenity 5 -->
+                <div class="bg-gray-50 rounded-lg p-6 text-center transition-all hover:shadow-md">
+                    <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-blue-50 rounded-full text-primary">
+                        <i class="ri-golf-line ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Golf Course</h3>
+                    <p class="text-gray-600">Play a round at our 18-hole championship golf course with stunning ocean views.</p>
+                </div>
+                
+                <!-- Amenity 6 -->
+                <div class="bg-gray-50 rounded-lg p-6 text-center transition-all hover:shadow-md">
+                    <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-blue-50 rounded-full text-primary">
+                        <i class="ri-heart-pulse-line ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Fitness Center</h3>
+                    <p class="text-gray-600">Stay active in our state-of-the-art fitness center with personal trainers available.</p>
+                </div>
+                
+                <!-- Amenity 7 -->
+                <div class="bg-gray-50 rounded-lg p-6 text-center transition-all hover:shadow-md">
+                    <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-blue-50 rounded-full text-primary">
+                        <i class="ri-user-smile-line ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Kids Club</h3>
+                    <p class="text-gray-600">Children will enjoy supervised activities and entertainment at our dedicated kids club.</p>
+                </div>
+                
+                <!-- Amenity 8 -->
+                <div class="bg-gray-50 rounded-lg p-6 text-center transition-all hover:shadow-md">
+                    <div class="w-16 h-16 flex items-center justify-center mx-auto mb-4 bg-blue-50 rounded-full text-primary">
+                        <i class="ri-wifi-line ri-2x"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Complimentary Wi-Fi</h3>
+                    <p class="text-gray-600">Stay connected with high-speed internet access available throughout the resort.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Resort Gallery</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Explore our beautiful resort through stunning imagery that showcases our luxurious accommodations and amenities.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item rounded-lg overflow-hidden h-64 col-span-1 md:col-span-2 md:row-span-2">
+                    <img src="https://readdy.ai/api/search-image?query=Luxury%20beachfront%20resort%20aerial%20view%20with%20infinity%20pools%2C%20white%20sandy%20beach%2C%20turquoise%20ocean%20water%2C%20tropical%20palm%20trees%2C%20elegant%20architecture%2C%20sunny%20day%2C%20professional%20drone%20photography%2C%20high-end%20travel%20magazine%20quality&width=800&height=800&seq=5&orientation=squarish" alt="Resort Aerial View" class="w-full h-full object-cover object-top">
+                    <div class="absolute inset-0 bg-black bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div class="w-12 h-12 flex items-center justify-center bg-white rounded-full">
+                            <i class="ri-zoom-in-line ri-lg text-gray-800"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item rounded-lg overflow-hidden h-64">
+                    <img src="https://readdy.ai/api/search-image?query=Luxury%20resort%20infinity%20pool%20overlooking%20ocean%20at%20sunset%2C%20lounge%20chairs%2C%20palm%20trees%2C%20ambient%20lighting%2C%20golden%20hour%20colors%2C%20professional%20resort%20photography&width=400&height=400&seq=6&orientation=squarish" alt="Infinity Pool" class="w-full h-full object-cover object-top">
+                    <div class="absolute inset-0 bg-black bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div class="w-12 h-12 flex items-center justify-center bg-white rounded-full">
+                            <i class="ri-zoom-in-line ri-lg text-gray-800"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item rounded-lg overflow-hidden h-64">
+                    <img src="https://readdy.ai/api/search-image?query=Luxury%20resort%20spa%20treatment%20room%20with%20ocean%20view%2C%20massage%20tables%2C%20candles%2C%20natural%20elements%2C%20soft%20lighting%2C%20serene%20atmosphere%2C%20professional%20spa%20photography&width=400&height=400&seq=7&orientation=squarish" alt="Spa Treatment Room" class="w-full h-full object-cover object-top">
+                    <div class="absolute inset-0 bg-black bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div class="w-12 h-12 flex items-center justify-center bg-white rounded-full">
+                            <i class="ri-zoom-in-line ri-lg text-gray-800"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item rounded-lg overflow-hidden h-64">
+                    <img src="https://readdy.ai/api/search-image?query=Luxury%20resort%20fine%20dining%20restaurant%20with%20ocean%20view%2C%20elegant%20table%20settings%2C%20soft%20lighting%2C%20upscale%20decor%2C%20empty%20tables%20ready%20for%20service%2C%20professional%20restaurant%20photography&width=400&height=400&seq=8&orientation=squarish" alt="Fine Dining Restaurant" class="w-full h-full object-cover object-top">
+                    <div class="absolute inset-0 bg-black bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div class="w-12 h-12 flex items-center justify-center bg-white rounded-full">
+                            <i class="ri-zoom-in-line ri-lg text-gray-800"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item rounded-lg overflow-hidden h-64">
+                    <img src="https://readdy.ai/api/search-image?query=Luxury%20resort%20beach%20cabana%20with%20white%20curtains%2C%20comfortable%20lounge%20beds%2C%20ocean%20view%2C%20palm%20trees%2C%20tropical%20setting%2C%20professional%20resort%20photography&width=400&height=400&seq=9&orientation=squarish" alt="Beach Cabana" class="w-full h-full object-cover object-top">
+                    <div class="absolute inset-0 bg-black bg-opacity-20 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div class="w-12 h-12 flex items-center justify-center bg-white rounded-full">
+                            <i class="ri-zoom-in-line ri-lg text-gray-800"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center text-primary font-medium hover:underline">
+                    View Full Gallery
+                    <div class="w-5 h-5 flex items-center justify-center ml-1">
+                        <i class="ri-arrow-right-line"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Why Choose Our Resort</h2>
+                    <p class="text-gray-600 mb-8">Our award-winning resort offers an unparalleled luxury experience with personalized service and exceptional amenities in a breathtaking beachfront location.</p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-primary mb-2" id="counter-1">98</div>
+                            <p class="text-gray-600">Guest Satisfaction</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-primary mb-2" id="counter-2">15</div>
+                            <p class="text-gray-600">Years of Excellence</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-primary mb-2" id="counter-3">24</div>
+                            <p class="text-gray-600">Industry Awards</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-primary mb-2" id="counter-4">5</div>
+                            <p class="text-gray-600">Star Rating</p>
+                        </div>
+                    </div>
+                    
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 flex items-center justify-center mr-3 mt-0.5 bg-blue-50 rounded-full text-primary">
+                                <i class="ri-check-line"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Prime Location</h4>
+                                <p class="text-gray-600">Situated on a pristine private beach with breathtaking ocean views</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 flex items-center justify-center mr-3 mt-0.5 bg-blue-50 rounded-full text-primary">
+                                <i class="ri-check-line"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Personalized Service</h4>
+                                <p class="text-gray-600">Dedicated staff providing attentive and personalized service</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-6 h-6 flex items-center justify-center mr-3 mt-0.5 bg-blue-50 rounded-full text-primary">
+                                <i class="ri-check-line"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-1">Sustainable Luxury</h4>
+                                <p class="text-gray-600">Eco-friendly practices without compromising on luxury and comfort</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="relative">
+                    <img src="https://readdy.ai/api/search-image?query=Luxury%20resort%20beachfront%20with%20elegant%20guests%20enjoying%20sunset%20cocktails%2C%20palm%20trees%2C%20comfortable%20lounge%20areas%2C%20fire%20pits%2C%20soft%20ambient%20lighting%2C%20professional%20lifestyle%20resort%20photography&width=600&height=800&seq=10&orientation=portrait" alt="Resort Experience" class="w-full h-auto rounded-lg shadow-xl">
+                    <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-lg shadow-lg max-w-xs">
+                        <div class="flex items-center mb-4">
+                            <div class="flex text-yellow-400">
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                                <i class="ri-star-fill"></i>
+                            </div>
+                            <span class="ml-2 text-gray-600">1,200+ Reviews</span>
+                        </div>
+                        <p class="italic text-gray-600">"An unforgettable experience. The perfect blend of luxury, comfort, and natural beauty."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Guest Experiences</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Hear what our guests have to say about their stay at our luxury resort.</p>
+            </div>
+            
+            <div class="relative testimonial-slider">
+                <div class="overflow-hidden">
+                    <div class="flex transition-transform duration-300 testimonial-slides">
+                        <!-- Testimonial 1 -->
+                        <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4">
+                            <div class="testimonial-card bg-white p-8 rounded-lg h-full">
+                                <div class="flex text-yellow-400 mb-4">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <p class="text-gray-600 italic mb-6">"Our stay at this resort exceeded all expectations. The staff went above and beyond to make our anniversary special. The oceanfront suite was breathtaking, and the dining experiences were unforgettable."</p>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden mr-4 bg-gray-200 flex items-center justify-center">
+                                        <i class="ri-user-3-line ri-lg text-gray-400"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold">Emily Richardson</h4>
+                                        <p class="text-sm text-gray-500">New York, USA</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4">
+                            <div class="testimonial-card bg-white p-8 rounded-lg h-full">
+                                <div class="flex text-yellow-400 mb-4">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <p class="text-gray-600 italic mb-6">"This was our third visit to the resort, and it keeps getting better. The infinity pool is stunning, and the spa treatments are world-class. We've already booked our next stay for the holidays."</p>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden mr-4 bg-gray-200 flex items-center justify-center">
+                                        <i class="ri-user-3-line ri-lg text-gray-400"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold">James & Sarah Wilson</h4>
+                                        <p class="text-sm text-gray-500">London, UK</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4">
+                            <div class="testimonial-card bg-white p-8 rounded-lg h-full">
+                                <div class="flex text-yellow-400 mb-4">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                                <p class="text-gray-600 italic mb-6">"As frequent travelers, we've stayed at many luxury resorts, but this one truly stands out. The beachfront villa was spectacular, and the culinary experiences were some of the best we've ever had."</p>
+                                <div class="flex items-center">
+                                    <div class="w-12 h-12 rounded-full overflow-hidden mr-4 bg-gray-200 flex items-center justify-center">
+                                        <i class="ri-user-3-line ri-lg text-gray-400"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold">Michael Chen</h4>
+                                        <p class="text-sm text-gray-500">Singapore</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slider Controls -->
+                <button class="absolute top-1/2 -left-4 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center text-gray-800 focus:outline-none slider-prev">
+                    <i class="ri-arrow-left-s-line ri-lg"></i>
+                </button>
+                <button class="absolute top-1/2 -right-4 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-md flex items-center justify-center text-gray-800 focus:outline-none slider-next">
+                    <i class="ri-arrow-right-s-line ri-lg"></i>
+                </button>
+                
+                <!-- Slider Dots -->
+                <div class="flex justify-center mt-8 slider-dots">
+                    <button class="w-3 h-3 rounded-full bg-primary mx-1 dot active"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-300 mx-1 dot"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-300 mx-1 dot"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Location</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Perfectly situated on a pristine beachfront, our resort offers easy access to local attractions while providing a secluded paradise.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="h-96 rounded-lg overflow-hidden relative">
+                    <div class="absolute inset-0" style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-size: cover; background-position: center;"></div>
+                </div>
+                
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Paradise Island Resort & Spa</h3>
+                    <p class="text-gray-600 mb-6">Our luxury resort is located on the pristine shores of Paradise Island, offering a perfect blend of seclusion and accessibility.</p>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center mr-4 text-primary">
+                                <i class="ri-map-pin-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Address</h4>
+                                <p class="text-gray-600">1234 Paradise Beach Road, Paradise Island, Tropical Haven</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center mr-4 text-primary">
+                                <i class="ri-plane-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Airport Transfer</h4>
+                                <p class="text-gray-600">25 minutes from International Airport (complimentary luxury transfer included)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 flex items-center justify-center mr-4 text-primary">
+                                <i class="ri-compass-3-line ri-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold">Nearby Attractions</h4>
+                                <p class="text-gray-600">Marine National Park (10 min), Cultural Village (15 min), Shopping District (20 min)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="bg-primary text-white px-6 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Get Directions</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-blue-50">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready for an Unforgettable Experience?</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-8">Book your stay today and experience the ultimate luxury beachfront getaway. Special offers available for early bookings.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button class="bg-primary text-white px-8 py-3 !rounded-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Book Your Stay</button>
+                <button class="border border-gray-300 bg-white px-8 py-3 !rounded-button font-medium hover:bg-gray-50 transition-all whitespace-nowrap">View Special Offers</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- Column 1 -->
+                <div>
+                    <a href="#" class="text-3xl font-['Pacifico'] text-white mb-6 inline-block">logo</a>
+                    <p class="text-gray-400 mb-6">Experience unparalleled luxury at our award-winning beachfront resort, where exceptional service meets breathtaking natural beauty.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
+                            <i class="ri-facebook-fill"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
+                            <i class="ri-instagram-line"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
+                            <i class="ri-twitter-x-line"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
+                            <i class="ri-pinterest-line"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Quick Links</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Rooms & Suites</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Dining</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Spa & Wellness</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Activities</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Special Offers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Contact Information</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mr-3 mt-1 text-gray-400">
+                                <i class="ri-map-pin-line"></i>
+                            </div>
+                            <span class="text-gray-400">1234 Paradise Beach Road, Paradise Island, Tropical Haven</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mr-3 mt-1 text-gray-400">
+                                <i class="ri-phone-line"></i>
+                            </div>
+                            <span class="text-gray-400">+1 (555) 123-4567</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="w-5 h-5 flex items-center justify-center mr-3 mt-1 text-gray-400">
+                                <i class="ri-mail-line"></i>
+                            </div>
+                            <span class="text-gray-400">reservations@luxuryresort.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe to receive special offers and updates from our resort.</p>
+                    <form class="mb-4">
+                        <div class="flex">
+                            <input type="email" placeholder="Your email address" class="w-full px-4 py-2 border-none rounded-l focus:outline-none text-gray-800">
+                            <button type="submit" class="bg-primary text-white px-4 py-2 !rounded-r-button font-medium hover:bg-opacity-90 transition-all whitespace-nowrap">Subscribe</button>
+                        </div>
+                    </form>
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">We Accept</h4>
+                        <div class="flex space-x-3">
+                            <div class="w-10 h-6 flex items-center justify-center text-gray-400">
+                                <i class="ri-visa-fill ri-lg"></i>
+                            </div>
+                            <div class="w-10 h-6 flex items-center justify-center text-gray-400">
+                                <i class="ri-mastercard-fill ri-lg"></i>
+                            </div>
+                            <div class="w-10 h-6 flex items-center justify-center text-gray-400">
+                                <i class="ri-paypal-fill ri-lg"></i>
+                            </div>
+                            <div class="w-10 h-6 flex items-center justify-center text-gray-400">
+                                <i class="ri-american-express-fill ri-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-500">&copy; 2025 Luxury Resort & Spa. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Testimonial slider
+            const slidesContainer = document.querySelector('.testimonial-slides');
+            const dots = document.querySelectorAll('.slider-dots .dot');
+            const prevBtn = document.querySelector('.slider-prev');
+            const nextBtn = document.querySelector('.slider-next');
+            let currentSlide = 0;
+            const totalSlides = dots.length;
+            
+            function goToSlide(index) {
+                // Calculate slide width based on viewport
+                let slideWidth = 100;
+                if (window.innerWidth >= 768 && window.innerWidth < 1024) {
+                    slideWidth = 50; // 2 slides visible on medium screens
+                } else if (window.innerWidth >= 1024) {
+                    slideWidth = 33.333; // 3 slides visible on large screens
+                }
+                
+                slidesContainer.style.transform = `translateX(-${index * slideWidth}%)`;
+                
+                // Update active dot
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.add('bg-primary');
+                        dot.classList.remove('bg-gray-300');
+                    } else {
+                        dot.classList.remove('bg-primary');
+                        dot.classList.add('bg-gray-300');
+                    }
+                });
+                
+                currentSlide = index;
+            }
+            
+            prevBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                goToSlide(currentSlide);
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                goToSlide(currentSlide);
+            });
+            
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    goToSlide(index);
+                });
+            });
+            
+            // Initialize slider
+            goToSlide(0);
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                goToSlide(currentSlide);
+            });
+        });
+    </script>
+</body>
+</html>
